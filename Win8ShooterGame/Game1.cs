@@ -128,6 +128,28 @@ namespace Win8ShooterGame.Windows
             base.Update(gameTime);
         }
 
+        /// <summary>
+        /// This is called when the game should draw itself.
+        /// </summary>
+        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        protected override void Draw(GameTime gameTime)
+        {
+            GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            // TODO: Add your drawing code here
+
+            // Start drawing
+            spriteBatch.Begin();
+
+            // Draw the Player
+            player.Draw(spriteBatch);
+
+            // Stop drawing
+            spriteBatch.End();
+
+            base.Draw(gameTime);
+        }
+
         private void UpdatePlayer(GameTime gameTime)
         {
             player.Update(gameTime);    // Animated player
@@ -193,28 +215,6 @@ namespace Win8ShooterGame.Windows
             return (currentKeyboardState.IsKeyDown(Keys.Right) ||
                     currentKeyboardState.IsKeyDown(Keys.D) ||
                     ButtonState.Pressed == currentGamePadState.DPad.Right);
-        }
-
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        protected override void Draw(GameTime gameTime)
-        {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            // TODO: Add your drawing code here
-
-            // Start drawing
-            spriteBatch.Begin();
-
-            // Draw the Player
-            player.Draw(spriteBatch);
-
-            // Stop drawing
-            spriteBatch.End();
-
-            base.Draw(gameTime);
         }
     }
 }

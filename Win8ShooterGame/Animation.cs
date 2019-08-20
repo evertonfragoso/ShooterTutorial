@@ -71,6 +71,7 @@ namespace Win8ShooterGame
             // Set the Animation to active by default
             this.Active = true;
         }
+
         public void Update(GameTime gameTime)
         {
             // Do not update the game if we are not active
@@ -98,12 +99,14 @@ namespace Win8ShooterGame
                 elapsedTime = 0;
             }
 
-            // Grab the correct frame in the image strip by multiplying the currentFrame index by the Frame width
+            // Grab the correct frame in the image strip by multiplying the currentFrame
+            // index by the Frame width
             sourceRect = new Rectangle(currentFrame * FrameWidth, 0, FrameWidth, FrameHeight);
 
-            // Grab the correct frame in the image strip by multiplying the currentFrame index by the frame width
+            // Grab the correct frame in the image strip by multiplying the currentFrame
+            // index by the frame width
             destinationRect = new Rectangle(
-                (int)Position.X - (int)(FrameWidth * scale) / 2,
+                (int)Position.X,// - (int)(FrameWidth * scale) / 2,
                 (int)Position.Y - (int)(FrameHeight * scale) / 2,
                 (int)(FrameWidth * scale),
                 (int)(FrameHeight * scale)
