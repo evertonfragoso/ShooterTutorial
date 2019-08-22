@@ -59,6 +59,10 @@ namespace ShooterTutorial
         private TimeSpan enemySpawnTime;
         private TimeSpan prevSpawnTime;
 
+        // Explosions
+        private List<Explosion> explosions;
+        private Texture2D explosionTexture;
+
         // A random number generator
         private Random random;
 
@@ -104,6 +108,9 @@ namespace ShooterTutorial
             laserSpawnTime = TimeSpan.FromSeconds(SECONDS_IN_MINUTE / RATE_OF_FIRE);
             prevLaserSpawnTime = TimeSpan.Zero;
 
+            // Initialize the explosion sheet
+            explosions = new List<Explosion>();
+
             // Initialize our random number generator
             random = new Random();
 
@@ -131,25 +138,28 @@ namespace ShooterTutorial
                 titleSafeArea.Y + titleSafeArea.Height / 2);
 
             Animation playerAnimation = new Animation();
-            Texture2D playerTexture = Content.Load<Texture2D>("Graphics/shipAnimation");
+            Texture2D playerTexture = Content.Load<Texture2D>("Graphics\\shipAnimation");
             playerAnimation.Initialize(playerTexture, playerPosition,
                 115, 69, 8, 30, Color.White, Scale, true);
 
             _player.Initialize(playerAnimation, playerPosition);
 
             // Load the parallaxing background
-            _bgLayer1.Initialize(Content, "Graphics/bgLayer1",
+            _bgLayer1.Initialize(Content, "Graphics\\bgLayer1",
                 GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, -1);
-            _bgLayer2.Initialize(Content, "Graphics/bgLayer2",
+            _bgLayer2.Initialize(Content, "Graphics\\bgLayer2",
                 GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, -2);
 
-            _mainBackground = Content.Load<Texture2D>("Graphics/mainbackground");
+            _mainBackground = Content.Load<Texture2D>("Graphics\\mainbackground");
 
             // Load the laser texture
-            laserTexture = Content.Load<Texture2D>("Graphics/laser");
+            laserTexture = Content.Load<Texture2D>("Graphics\\laser");
 
             // Enemy texture
-            enemyTexture = Content.Load<Texture2D>("Graphics/mineAnimation");
+            enemyTexture = Content.Load<Texture2D>("Graphics\\mineAnimation");
+
+            // Explosion texture
+            explosionTexture = Content.Load<Texture2D>("Graphics\\explosion");
         }
 
         /// <summary>
@@ -198,6 +208,9 @@ namespace ShooterTutorial
             // Update laser beams
             UpdateLasers(gameTime);
 
+            // Update explosions
+            UpdateExplosions(gameTime);
+
             // Update the collision
             UpdateCollision();
 
@@ -237,6 +250,12 @@ namespace ShooterTutorial
             for(int i = 0; i < enemies.Count; i++)
             {
                 enemies[i].Draw(spriteBatch);
+            }
+
+            // Draw the explosions
+            for(int e = 0; e < explosions.Count; e++)
+            {
+                explosions[e].Draw(spriteBatch);
             }
 
             // Stop drawing
@@ -424,6 +443,31 @@ namespace ShooterTutorial
             //laserSoundInstance.Play();
         }
 
+        private void AddExplosion(Vector2 enemyPosition)
+        {
+            Animation explosionAnimation = new Animation();
+
+            explosionAnimation.Initialize(explosionTexture, enemyPosition,
+                                    134, 134, 12, 30, Color.White, 1.0f, true);
+
+            Explosion explosion = new Explosion();
+            explosion.Initialize(explosionAnimation, enemyPosition);
+
+            explosions.Add(explosion);
+        }
+
+        public void UpdateExplosions(GameTime gameTime)
+        {
+            for(int e = 0; e < explosions.Count; e++)
+            {
+                explosions[e].Update(gameTime);
+                if(explosions[e].Active == false)
+                {
+                    explosions.RemoveAt(e);
+                }
+            }
+        }
+
         private void UpdateCollision()
         {
             // Use the Rectangle's built-in intersect function to
@@ -453,8 +497,12 @@ namespace ShooterTutorial
                     // the enemy damage
                     _player.Health -= enemies[e].Damage;
 
+                    // Add explosion where the enemy was
+                    AddExplosion(enemies[e].Position);
+
                     // Since the enemy collided with the player destroy it
                     enemies[e].Health = 0;
+                    enemies[e].Active = false;
 
                     // If the player health is less than zero we died
                     if (_player.Health <= 0)
@@ -480,8 +528,8 @@ namespace ShooterTutorial
                         // Record the kill if the enemy is killed
                         if(enemies[e].Health <= 0)
                         {
-                            /* TODO: add explosion where the enemy was */
-                            //AddExplosion(e.Position);
+                            // Add explosion where the enemy was
+                            AddExplosion(enemies[e].Position);
 
                             /* TODO: record the kill */
                             //myGame.Stage.EnemiesKilled++;
