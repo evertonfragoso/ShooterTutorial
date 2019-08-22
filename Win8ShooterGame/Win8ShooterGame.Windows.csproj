@@ -55,6 +55,7 @@
     <Compile Include="ParallaxingBackground.cs" />
     <Compile Include="GameObjects\Enemy.cs" />
     <Compile Include="GameObjects\Player.cs" />
+    <Compile Include="GameObjects\Laser.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico" />
