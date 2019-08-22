@@ -1,9 +1,9 @@
-﻿// using System;
+﻿using System;
 using Microsoft.Xna.Framework;
-// using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Win8ShooterGame
+namespace ShooterTutorial
 {
     public class Animation
     {
@@ -43,14 +43,16 @@ namespace Win8ShooterGame
         // The state of the Animation
         public bool Active;
 
-        // Determines if the animation will keep playing or deactivate after one run
+        // Determines if the animation will keep playing or deactivate after
+        // one run
         public bool Looping;
 
         // Width of a given frame
         public Vector2 Position;
 
-        public void Initialize(Texture2D texture, Vector2 position, int frameWidth, int frameHeight,
-                                int frameCount, int frametime, Color color, float scale, bool looping)
+        public void Initialize(Texture2D texture, Vector2 position, int frameWidth,
+                                int frameHeight, int frameCount, int frametime,
+                                Color color, float scale, bool looping)
         {
             // Keep a local copy of the values passed in
             this.color = color;
@@ -80,13 +82,15 @@ namespace Win8ShooterGame
             // Update the elapsed time
             elapsedTime += (int)gameTime.ElapsedGameTime.TotalMilliseconds;
 
-            // If the elapsed time is larger than the frame time we need to switch frames
+            // If the elapsed time is larger than the frame time we need to
+            // switch frames
             if (elapsedTime > frameTime)
             {
                 // Move to the next frame
                 currentFrame++;
 
-                // If the currentFrame is equal to frameCount reset currentFrame to zero
+                // If the currentFrame is equal to frameCount reset
+                // currentFrame to zero
                 if (currentFrame == frameCount)
                 {
                     currentFrame = 0;
@@ -99,15 +103,18 @@ namespace Win8ShooterGame
                 elapsedTime = 0;
             }
 
-            // Grab the correct frame in the image strip by multiplying the currentFrame
-            // index by the Frame width
-            sourceRect = new Rectangle(currentFrame * FrameWidth, 0, FrameWidth, FrameHeight);
+            // Grab the correct frame in the image strip by multiplying
+            // the currentFrame index by the Frame width
+            sourceRect = new Rectangle(currentFrame * FrameWidth, 0,
+                                        FrameWidth, FrameHeight);
 
-            // Grab the correct frame in the image strip by multiplying the currentFrame
-            // index by the frame width
+            // Grab the correct frame in the image strip by multiplying
+            // the currentFrame index by the frame width
             destinationRect = new Rectangle(
-                (int)Position.X,// - (int)(FrameWidth * scale) / 2,
-                (int)Position.Y - (int)(FrameHeight * scale) / 2,
+                (int)Position.X,
+                (int)Position.Y,
+                //(int)Position.X - (int)(FrameWidth * scale) / 2,
+                //(int)Position.Y - (int)(FrameHeight * scale) / 2,
                 (int)(FrameWidth * scale),
                 (int)(FrameHeight * scale)
             );

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Win8ShooterGame.Windows
+namespace ShooterTutorial
 {
     /// <summary>
     /// The main class.

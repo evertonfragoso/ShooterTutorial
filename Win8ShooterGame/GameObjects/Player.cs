@@ -1,15 +1,11 @@
-﻿// using System;
+﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Win8ShooterGame;
 
-namespace Shooter
+namespace ShooterTutorial.GameObjects
 {
     class Player
     {
-        // Static Texture representing the player
-        //public Texture2D PlayerTexture;
-
         // Animation representing the player
         public Animation PlayerAnimation;
 
@@ -25,23 +21,19 @@ namespace Shooter
         // Get the width of the player ship
         public int Width
         {
-            //get { return PlayerTexture.Width; }       // Static Player
-            get { return PlayerAnimation.FrameWidth; }  // Animated Player
+            get { return PlayerAnimation.FrameWidth; }
         }
 
         // Get the height of the player ship
         public int Height
         {
-            //get { return PlayerTexture.Height; }          // Static Player
-            get { return PlayerAnimation.FrameHeight; }     // Animated Player
+            get { return PlayerAnimation.FrameHeight; }
 
         }
 
-        //public void Initialize(Texture2D texture, Vector2 position)   // Static Player
-        public void Initialize(Animation animation, Vector2 position)   // Animated Player
+        public void Initialize(Animation animation, Vector2 position)
         {
-            //PlayerTexture = texture;      // Static Player
-            PlayerAnimation = animation;    // Animated Player
+            PlayerAnimation = animation;
 
             // Set the starting position of the player around the middle of
             // the screen and to the back
@@ -55,8 +47,7 @@ namespace Shooter
         }
 
         // Update the player animation
-        //public void Update()                  // Static Player
-        public void Update(GameTime gameTime)   // Animated Player
+        public void Update(GameTime gameTime)
         {
             // Animated Player
             PlayerAnimation.Position = Position;
@@ -65,9 +56,7 @@ namespace Shooter
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            PlayerAnimation.Draw(spriteBatch);                                  // Animated Player
-            //spriteBatch.Draw(PlayerTexture, Position, null, Color.White, 0f,  // Static Player
-                //Vector2.Zero, 1f, SpriteEffects.None, 0f);
+            PlayerAnimation.Draw(spriteBatch);
         }
     }
 }
