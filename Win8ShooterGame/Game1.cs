@@ -5,6 +5,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 
 using ShooterTutorial.GameObjects;
 
@@ -62,6 +64,17 @@ namespace ShooterTutorial
         // Explosions
         private List<Explosion> explosions;
         private Texture2D explosionTexture;
+
+        // BGM
+        private Song gameMusic;
+
+        // Laser sound and instance
+        private SoundEffect laserSound;
+        private SoundEffectInstance laserSoundInstance;
+
+        // Explosion sound and instance
+        private SoundEffect explosionSound;
+        private SoundEffectInstance explosionSoundInstance;
 
         // A random number generator
         private Random random;
@@ -160,6 +173,19 @@ namespace ShooterTutorial
 
             // Explosion texture
             explosionTexture = Content.Load<Texture2D>("Graphics\\explosion");
+
+            // Load laser sound effect and create the effect instance
+            laserSound = Content.Load<SoundEffect>("Sounds\\laserFire");
+            laserSoundInstance = laserSound.CreateInstance();
+
+            // Load explosion sound effect and create the effect instance
+            explosionSound = Content.Load<SoundEffect>("Sounds\\explosion");
+
+            // Load the BGM
+            gameMusic = Content.Load<Song>("Sounds\\gameMusic");
+            explosionSoundInstance = explosionSound.CreateInstance();
+
+            MediaPlayer.Play(gameMusic);
         }
 
         /// <summary>
@@ -169,6 +195,9 @@ namespace ShooterTutorial
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
+
+            laserSoundInstance.Dispose();
+            explosionSoundInstance.Dispose();
         }
 
         /// <summary>
@@ -213,6 +242,9 @@ namespace ShooterTutorial
 
             // Update the collision
             UpdateCollision();
+
+            /* Stop the music when we want */
+            //MediaPlayer.Stop();
 
             base.Update(gameTime);
         }
@@ -399,6 +431,9 @@ namespace ShooterTutorial
 
                 // Add the laser to the list
                 AddLaser();
+
+                // Play laser sound
+                laserSoundInstance.Play();
             }
         }
 
@@ -438,9 +473,6 @@ namespace ShooterTutorial
             // initialize the laser
             laser.Initialize(laserAnimation, laserPosition);
             laserBeams.Add(laser);
-
-            /* TODO: add code to create a laser. */
-            //laserSoundInstance.Play();
         }
 
         private void AddExplosion(Vector2 enemyPosition)
@@ -454,6 +486,9 @@ namespace ShooterTutorial
             explosion.Initialize(explosionAnimation, enemyPosition);
 
             explosions.Add(explosion);
+
+            // Play the explosion sound
+            explosionSound.Play();
         }
 
         public void UpdateExplosions(GameTime gameTime)
