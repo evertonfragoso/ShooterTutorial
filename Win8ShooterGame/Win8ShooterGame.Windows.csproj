@@ -57,6 +57,11 @@
     <Compile Include="GameObjects\Player.cs" />
     <Compile Include="GameObjects\Laser.cs" />
     <Compile Include="GameObjects\Explosion.cs" />
+    <Compile Include="GameScreens\MenuSCreen.cs" />
+    <Compile Include="GameScreens\GameOverScreen.cs" />
+    <Compile Include="GameScreens\GameScreen.cs" />
+    <Compile Include="GameScreens\BaseScreen.cs" />
+    <Compile Include="GameScreens\ScreenManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico" />
@@ -68,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="GameObjects\" />
+    <Folder Include="GameScreens\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />

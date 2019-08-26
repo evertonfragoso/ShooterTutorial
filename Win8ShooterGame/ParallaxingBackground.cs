@@ -10,11 +10,11 @@ namespace ShooterTutorial
         Texture2D _texture;
 
         // An array of positions of the parallaxing background.
-        Vector2[] _positions;
+        private Vector2[] _positions;
 
-        int _speed;
-        int _screenHeight;
-        int _screenWidth;
+        private int _speed;
+        private int _screenHeight;
+        private int _screenWidth;
 
         public void Initialize(ContentManager content, String texturePath, int screenWidth, int screenHeight, int speed)
         {
