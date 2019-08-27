@@ -42,10 +42,13 @@ namespace ShooterTutorial
         /// </summary>
         protected override void Initialize()
         {
+            // Create a new SpriteBatch, which can be used to draw textures.
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+
             // Initialize screen manager and add screens to it
-            ScreenManager.AddScreen(new MenuScreen(GraphicsDevice, Content));
-            ScreenManager.AddScreen(new GameScreen(GraphicsDevice, Content));
-            ScreenManager.AddScreen(new GameOverScreen(GraphicsDevice, Content));
+            ScreenManager.AddScreen(new MenuScreen(GraphicsDevice, Content, spriteBatch));
+            ScreenManager.AddScreen(new GameScreen(GraphicsDevice, Content, spriteBatch));
+            ScreenManager.AddScreen(new GameOverScreen(GraphicsDevice, Content, spriteBatch));
 
             // Set the active screen to the game menu
             ScreenManager.GotoScreen(MenuScreen.SCREEN_NAME);
@@ -65,9 +68,6 @@ namespace ShooterTutorial
         /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-
             // Have the active screen initialize itself
             ScreenManager.LoadContent();
         }
@@ -88,6 +88,7 @@ namespace ShooterTutorial
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            /* TODO: Update ESC to pause and open in-game menu instead of close */
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
@@ -101,10 +102,14 @@ namespace ShooterTutorial
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
+
+            spriteBatch.Begin();
 
             // Draw the active screen
             ScreenManager.Draw(gameTime);
+
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }

@@ -1,20 +1,25 @@
 ﻿//using System;
 //using System.Collections.Generic;
 //using System.Linq;
-//using System.Text;
+using System.Text;
 
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Content;
 //using Microsoft.Xna.Framework.Media;
+
+using ShooterTutorial.GameObjects.Buttons;
 
 namespace ShooterTutorial.GameScreens
 {
     public class MenuScreen : BaseScreen
     {
-        private Texture2D texture;
-        private Rectangle destinationRectangle;
+        private Texture2D menuTexture;
+        private Rectangle backgroundRectangle;
+
+        private static GameStartButton _startButton;
+
         //private Song menuMusic;
 
         //private int _screen_height;
@@ -22,16 +27,20 @@ namespace ShooterTutorial.GameScreens
 
         public const string SCREEN_NAME = "menuScreen";
 
-        public MenuScreen(GraphicsDevice device, ContentManager content)
-            : base(device, content, SCREEN_NAME)
+        public MenuScreen(GraphicsDevice device, ContentManager content, SpriteBatch spriteBatch)
+            : base(device, content, spriteBatch, SCREEN_NAME)
         {
         }
 
         public override bool Initialize()
         {
-            texture = _content.Load<Texture2D>("Graphics\\mainMenu");
-            destinationRectangle = new Rectangle(0, 0,
-                                        texture.Width, _device.Viewport.Height);
+            menuTexture = _content.Load<Texture2D>("Graphics\\mainMenu");
+            backgroundRectangle = new Rectangle(0, 0,
+                menuTexture.Width, _device.Viewport.Height);
+
+            _startButton = new GameStartButton(_device, _content, _spriteBatch);
+            _startButton.ButtonPosition = new Vector2(360, 300);
+            _startButton.Initialize();
 
             //MediaPlayer.Play(menuMusic);
             //menuMusic = _content.Load<Song>("Sounds\\menuMusic");
@@ -50,23 +59,25 @@ namespace ShooterTutorial.GameScreens
             base.UnloadContent();
         }
 
-        public override void Draw(GameTime gameTime)
-        {
-            _device.Clear(Color.CornflowerBlue);
-            _spriteBatch.Begin();
-            _spriteBatch.Draw(texture, destinationRectangle, Color.White);
-            base.Draw(gameTime);
-        }
-
         public override void Update(GameTime gameTime)
         {
-            /* Improve this shit yikes - make this a button to click */
-            // Go to Game Screen when pressing N (for New)
-            if (Keyboard.GetState().IsKeyDown(Keys.N))
+            if (BaseButton.IsHoverButton() &&
+                ButtonState.Pressed == Mouse.GetState().LeftButton)
             {
                 ScreenManager.GotoScreen(GameScreen.SCREEN_NAME);
             }
+
             base.Update(gameTime);
         }
+
+        public override void Draw(GameTime gameTime)
+        {
+            _spriteBatch.Draw(menuTexture, backgroundRectangle, Color.White);
+            _startButton.Draw();
+
+            base.Draw(gameTime);
+        }
+
+        // END
     }
 }

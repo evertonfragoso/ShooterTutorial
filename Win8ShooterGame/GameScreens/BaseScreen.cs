@@ -12,8 +12,8 @@
 //using System.Linq;
 //using System.Text;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace ShooterTutorial.GameScreens
 {
@@ -23,19 +23,19 @@ namespace ShooterTutorial.GameScreens
         protected ContentManager _content;
         protected SpriteBatch _spriteBatch;
 
+        public string Name;
+
         /// <summary>
         /// Screen Constructor
         /// </summary>
         /// <param name="name">Must be unique since when you use ScreenManager is per name</param>
-        public BaseScreen(GraphicsDevice device, ContentManager content, string name)
+        public BaseScreen(GraphicsDevice device, ContentManager content, SpriteBatch spriteBatch, string name)
         {
             Name = name;
             _device = device;
             _content = content;
-            _spriteBatch = new SpriteBatch(_device);
+            _spriteBatch = spriteBatch;
         }
-
-        public string Name;
 
         /// <summary>
         /// Virtual Function that's called when entering a Screen
@@ -66,7 +66,6 @@ namespace ShooterTutorial.GameScreens
 
         public virtual void Draw(GameTime gameTime)
         {
-            _spriteBatch.End();
         }
 
         public virtual void UnloadContent()

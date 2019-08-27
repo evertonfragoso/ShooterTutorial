@@ -62,6 +62,8 @@
     <Compile Include="GameScreens\GameScreen.cs" />
     <Compile Include="GameScreens\BaseScreen.cs" />
     <Compile Include="GameScreens\ScreenManager.cs" />
+    <Compile Include="GameObjects\Buttons\BaseButton.cs" />
+    <Compile Include="GameObjects\Buttons\GameStartButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico" />
@@ -74,6 +76,7 @@
   <ItemGroup>
     <Folder Include="GameObjects\" />
     <Folder Include="GameScreens\" />
+    <Folder Include="GameObjects\Buttons\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />

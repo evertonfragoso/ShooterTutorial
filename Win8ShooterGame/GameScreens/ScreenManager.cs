@@ -86,7 +86,7 @@ namespace ShooterTutorial.GameScreens
         }
 
         /// <summary>
-        /// Falls back to previous selected screen if any
+        /// Initialize screen if it exists
         /// </summary>
         public static void Initialize()
         {

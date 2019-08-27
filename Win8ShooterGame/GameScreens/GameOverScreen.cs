@@ -22,8 +22,8 @@ namespace ShooterTutorial.GameScreens
 
         public const string SCREEN_NAME = "gameOverScreen";
 
-        public GameOverScreen(GraphicsDevice device, ContentManager content)
-            : base(device, content, SCREEN_NAME)
+        public GameOverScreen(GraphicsDevice device, ContentManager content, SpriteBatch spriteBatch)
+            : base(device, content, spriteBatch, SCREEN_NAME)
         {
         }
 
@@ -52,8 +52,6 @@ namespace ShooterTutorial.GameScreens
 
         public override void Draw(GameTime gameTime)
         {
-            _device.Clear(Color.CornflowerBlue);
-            _spriteBatch.Begin();
             _spriteBatch.Draw(texture, destinationRectangle, Color.White);
             base.Draw(gameTime);
         }

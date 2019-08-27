@@ -61,6 +61,13 @@
 /processorParam:TextureFormat=Color
 /build:Graphics/explosion.png
 
+#begin Graphics/gameFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Graphics/gameFont.spritefont
+
 #begin Graphics/laser.png
 /importer:TextureImporter
 /processor:TextureProcessor

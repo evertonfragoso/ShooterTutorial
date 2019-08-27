@@ -78,8 +78,8 @@ namespace ShooterTutorial.GameScreens
         // A random number generator
         private static Random random;
 
-        public GameScreen(GraphicsDevice device, ContentManager content)
-            : base(device, content, SCREEN_NAME)
+        public GameScreen(GraphicsDevice device, ContentManager content, SpriteBatch spriteBatch)
+            : base(device, content, spriteBatch, SCREEN_NAME)
         {
         }
 
@@ -168,7 +168,7 @@ namespace ShooterTutorial.GameScreens
 
         public override void UnloadContent()
         {
-            MediaPlayer.Stop();
+            //MediaPlayer.Stop();
             laserSoundInstance.Dispose();
             explosionSoundInstance.Dispose();
 
@@ -208,9 +208,6 @@ namespace ShooterTutorial.GameScreens
             // Update the collision
             UpdateCollision();
 
-            /* Stop the music when we want */
-            //MediaPlayer.Stop();
-
             // Check if ESC is pressed and go to GameOver screen
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
@@ -222,10 +219,6 @@ namespace ShooterTutorial.GameScreens
 
         public override void Draw(GameTime gameTime)
         {
-            _device.Clear(Color.CornflowerBlue);
-
-            _spriteBatch.Begin();
-
             // Draw the Main Background Texture
             _spriteBatch.Draw(_mainBackground, _rectBackground, Color.White);
 
