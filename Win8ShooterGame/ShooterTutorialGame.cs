@@ -13,7 +13,7 @@ namespace ShooterTutorial
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Game1 : Game
+    public class ShooterTutorialGame : Game
     {
         private const int DEFAULT_SCREEN_WIDTH = 800;
         private const int DEFAULT_SCREEN_HEIGHT = 480;
@@ -21,10 +21,10 @@ namespace ShooterTutorial
         private readonly GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
 
-        public Game1()
-        {
-            IsMouseVisible = true;
+        public static bool MouseVisibility = true;
 
+        public ShooterTutorialGame()
+        {
             graphics = new GraphicsDeviceManager(this)
             {
                 PreferredBackBufferWidth = DEFAULT_SCREEN_WIDTH,
@@ -54,7 +54,6 @@ namespace ShooterTutorial
 
             // Set the active screen to the game menu
             ScreenManager.GotoScreen(MenuScreen.SCREEN_NAME);
-            //ScreenManager.GotoScreen(GameScreen.SCREEN_NAME);
 
             ScreenManager.Initialize();
 
@@ -90,6 +89,8 @@ namespace ShooterTutorial
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            IsMouseVisible = MouseVisibility;
+
             /* TODO: Update ESC to pause and open in-game menu instead of close */
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();

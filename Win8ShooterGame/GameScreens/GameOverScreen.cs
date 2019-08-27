@@ -29,6 +29,8 @@ namespace ShooterTutorial.GameScreens
 
         public override bool Initialize()
         {
+            ShooterTutorialGame.MouseVisibility = true;
+
             texture = _content.Load<Texture2D>("Graphics\\endMenu");
             destinationRectangle = new Rectangle(0, 0,
                                         texture.Width, _device.Viewport.Height);
