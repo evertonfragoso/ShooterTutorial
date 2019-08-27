@@ -6,16 +6,16 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace ShooterTutorial.GameObjects.Buttons
 {
-    public class GameStartButton : BaseButton
+    public class GameMenuButton : BaseButton
     {
-        public GameStartButton(GraphicsDevice device, ContentManager content, SpriteBatch spriteBatch)
+        public GameMenuButton(GraphicsDevice device, ContentManager content, SpriteBatch spriteBatch)
             : base(device, content, spriteBatch)
         {
         }
 
         public override bool Initialize()
         {
-            _buttonText = "NEW GAME";
+            _buttonText = "MENU";
             //_frontColor = Color.White;
             _frontColor = new Color(255, 255, 255, 0);
             _backColor = new Color(255, 0, 0, 255);

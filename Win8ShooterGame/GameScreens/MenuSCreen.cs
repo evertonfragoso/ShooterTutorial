@@ -39,7 +39,7 @@ namespace ShooterTutorial.GameScreens
                 menuTexture.Width, _device.Viewport.Height);
 
             _startButton = new GameStartButton(_device, _content, _spriteBatch);
-            _startButton.ButtonPosition = new Vector2(360, 300);
+            _startButton.ButtonPosition = new Vector2(340, 300);
             _startButton.Initialize();
 
             //MediaPlayer.Play(menuMusic);

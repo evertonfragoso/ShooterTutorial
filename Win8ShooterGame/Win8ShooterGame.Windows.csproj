@@ -64,6 +64,7 @@
     <Compile Include="GameScreens\ScreenManager.cs" />
     <Compile Include="GameObjects\Buttons\BaseButton.cs" />
     <Compile Include="GameObjects\Buttons\GameStartButton.cs" />
+    <Compile Include="GameObjects\Buttons\GameMenuButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico" />
