@@ -39,13 +39,21 @@ namespace ShooterTutorial.GameScreens
             backgroundRectangle = new Rectangle(0, 0,
                 menuTexture.Width, _device.Viewport.Height);
 
-            _startButton = new GameStartButton(_device, _content, _spriteBatch);
-            _startButton.ButtonPosition = new Vector2(340, 300);
-            _startButton.Initialize();
+            SpriteFont spriteFont = _content.Load<SpriteFont>("Graphics\\gameFont");
 
-            _exitButton = new GameExitButton(_device, _content, _spriteBatch);
-            _exitButton.ButtonPosition = new Vector2(370, 350);
-            _exitButton.Initialize();
+            BaseButton startBaseButton = new BaseButton();
+            BaseButton exitBaseButton = new BaseButton();
+            _startButton = new GameStartButton();
+            _exitButton = new GameExitButton();
+
+            Vector2 startButtonPosition = new Vector2(340, 300);
+            Vector2 exitButtonPosition = new Vector2(380, 350);
+
+            startBaseButton.Initialize(spriteFont, _startButton.Text, startButtonPosition);
+            exitBaseButton.Initialize(spriteFont, _exitButton.Text, exitButtonPosition);
+
+            _startButton.Initialize(startBaseButton, startButtonPosition);
+            _exitButton.Initialize(exitBaseButton, exitButtonPosition);
 
             //MediaPlayer.Play(menuMusic);
             //menuMusic = _content.Load<Song>("Sounds\\menuMusic");
@@ -66,11 +74,11 @@ namespace ShooterTutorial.GameScreens
 
         public override void Update(GameTime gameTime)
         {
-            if (BaseButton.IsHoverButton() &&
-                ButtonState.Pressed == Mouse.GetState().LeftButton)
-            {
-                ScreenManager.GotoScreen(GameScreen.SCREEN_NAME);
-            }
+            //if (_startButton.IsHoverButton() &&
+            //    ButtonState.Pressed == Mouse.GetState().LeftButton)
+            //{
+            //    ScreenManager.GotoScreen(GameScreen.SCREEN_NAME);
+            //}
 
             base.Update(gameTime);
         }
@@ -78,8 +86,8 @@ namespace ShooterTutorial.GameScreens
         public override void Draw(GameTime gameTime)
         {
             _spriteBatch.Draw(menuTexture, backgroundRectangle, Color.White);
-            _startButton.Draw();
-            _exitButton.Draw();
+            _startButton.Draw(_spriteBatch);
+            _exitButton.Draw(_spriteBatch);
 
             base.Draw(gameTime);
         }

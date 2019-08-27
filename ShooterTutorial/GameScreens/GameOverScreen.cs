@@ -19,7 +19,7 @@ namespace ShooterTutorial.GameScreens
         private Rectangle destinationRectangle;
         //private Song menuMusic;
 
-        private static GameMenuButton _menuButton;
+        //private static GameMenuButton _menuButton;
 
         //private int _screen_height;
         //private int _screen_width;
@@ -39,9 +39,9 @@ namespace ShooterTutorial.GameScreens
             destinationRectangle = new Rectangle(0, 0,
                                         texture.Width, _device.Viewport.Height);
 
-            _menuButton = new GameMenuButton(_device, _content, _spriteBatch);
-            _menuButton.ButtonPosition = new Vector2(360, 300);
-            _menuButton.Initialize();
+            //_menuButton = new GameMenuButton(_device, _content, _spriteBatch);
+            //_menuButton..PPosition = new Vector2(360, 300);
+            //_menuButton.Initialize();
 
             //menuMusic = _content.Load<Song>("Sounds\\menuMusic");
             //MediaPlayer.Play(menuMusic);
@@ -62,11 +62,11 @@ namespace ShooterTutorial.GameScreens
 
         public override void Update(GameTime gameTime)
         {
-            if (BaseButton.IsHoverButton() &&
-                ButtonState.Pressed == Mouse.GetState().LeftButton)
-            {
-                ScreenManager.GotoScreen(MenuScreen.SCREEN_NAME);
-            }
+            //if (BaseButton.IsHoverButton() &&
+            //    ButtonState.Pressed == Mouse.GetState().LeftButton)
+            //{
+            //    ScreenManager.GotoScreen(MenuScreen.SCREEN_NAME);
+            //}
 
             base.Update(gameTime);
         }
@@ -74,7 +74,7 @@ namespace ShooterTutorial.GameScreens
         public override void Draw(GameTime gameTime)
         {
             _spriteBatch.Draw(texture, destinationRectangle, Color.White);
-            _menuButton.Draw();
+            //_menuButton.Draw();
 
             base.Draw(gameTime);
         }

@@ -1,36 +1,37 @@
 ﻿//using System;
 
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace ShooterTutorial.GameObjects.Buttons
 {
-    public class GameExitButton : BaseButton
+    public class GameExitButton
     {
-        public GameExitButton(GraphicsDevice device, ContentManager content, SpriteBatch spriteBatch)
-            : base(device, content, spriteBatch)
+        public BaseButton Button;
+
+        public Vector2 Position;
+        public string Text;
+
+        public GameExitButton()
         {
+            Text = "EXIT";
         }
 
-        public override bool Initialize()
+        public void Initialize(BaseButton baseButton, Vector2 position)
         {
-            _buttonText = "EXIT";
-            //_frontColor = Color.White;
-            _frontColor = new Color(255, 255, 255, 0);
-            _backColor = new Color(255, 0, 0, 255);
-
-            return base.Initialize();
+            Button = baseButton;
+            Position = position;
         }
 
-        public override void Update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
+            Button.Position = Position;
+            Button.Update(gameTime);
         }
 
-        public override void Draw()
+        public void Draw(SpriteBatch spriteBatch)
         {
-            base.Draw();
+            Button.Draw(spriteBatch);
         }
     }
 }

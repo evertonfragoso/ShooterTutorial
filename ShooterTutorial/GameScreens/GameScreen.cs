@@ -87,8 +87,19 @@ namespace ShooterTutorial.GameScreens
         {
             ShooterTutorialGame.MouseVisibility = false;
 
+            // Load the player resources
+            Rectangle titleSafeArea = _device.Viewport.TitleSafeArea;
+            Vector2 playerPosition = new Vector2(titleSafeArea.X,
+                                    titleSafeArea.Y + (titleSafeArea.Height / 2));
+
+            Animation playerAnimation = new Animation();
+            Texture2D playerTexture = _content.Load<Texture2D>("Graphics\\shipAnimation");
+            playerAnimation.Initialize(playerTexture, playerPosition,
+                115, 69, 8, 30, Color.White, Scale, true);
+
             // Initialize the player class
             _player = new Player();
+            _player.Initialize(playerAnimation, playerPosition);
 
             // Background
             _rectBackground = new Rectangle(0, 0, _device.Viewport.Width,
@@ -117,18 +128,6 @@ namespace ShooterTutorial.GameScreens
 
             // Initialize our random number generator
             random = new Random();
-
-            // Load the player resources
-            Rectangle titleSafeArea = _device.Viewport.TitleSafeArea;
-            Vector2 playerPosition = new Vector2(titleSafeArea.X,
-                                    titleSafeArea.Y + (titleSafeArea.Height / 2));
-
-            Animation playerAnimation = new Animation();
-            Texture2D playerTexture = _content.Load<Texture2D>("Graphics\\shipAnimation");
-            playerAnimation.Initialize(playerTexture, playerPosition,
-                115, 69, 8, 30, Color.White, Scale, true);
-
-            _player.Initialize(playerAnimation, playerPosition);
 
             // Load the parallaxing background
             _bgLayer1.Initialize(_content, "Graphics\\bgLayer1",
