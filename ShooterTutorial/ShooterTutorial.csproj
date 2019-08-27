@@ -9,8 +9,8 @@
     <ProjectGuid>{0D8FE56C-CC1F-438D-8472-D5A6A17AEA26}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Win8ShooterGame</RootNamespace>
-    <AssemblyName>Win8ShooterGame</AssemblyName>
+    <RootNamespace>ShooterTutorial</RootNamespace>
+    <AssemblyName>ShooterTutorial</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MonoGamePlatform>Windows</MonoGamePlatform>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
@@ -65,6 +65,7 @@
     <Compile Include="GameObjects\Buttons\BaseButton.cs" />
     <Compile Include="GameObjects\Buttons\GameStartButton.cs" />
     <Compile Include="GameObjects\Buttons\GameMenuButton.cs" />
+    <Compile Include="GameObjects\Buttons\GameExitButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico" />

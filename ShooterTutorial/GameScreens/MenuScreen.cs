@@ -19,6 +19,7 @@ namespace ShooterTutorial.GameScreens
         private Rectangle backgroundRectangle;
 
         private static GameStartButton _startButton;
+        private static GameExitButton _exitButton;
 
         //private Song menuMusic;
 
@@ -41,6 +42,10 @@ namespace ShooterTutorial.GameScreens
             _startButton = new GameStartButton(_device, _content, _spriteBatch);
             _startButton.ButtonPosition = new Vector2(340, 300);
             _startButton.Initialize();
+
+            _exitButton = new GameExitButton(_device, _content, _spriteBatch);
+            _exitButton.ButtonPosition = new Vector2(370, 350);
+            _exitButton.Initialize();
 
             //MediaPlayer.Play(menuMusic);
             //menuMusic = _content.Load<Song>("Sounds\\menuMusic");
@@ -74,6 +79,7 @@ namespace ShooterTutorial.GameScreens
         {
             _spriteBatch.Draw(menuTexture, backgroundRectangle, Color.White);
             _startButton.Draw();
+            _exitButton.Draw();
 
             base.Draw(gameTime);
         }

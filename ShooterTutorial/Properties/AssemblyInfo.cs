@@ -5,8 +5,8 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Win8ShooterGame.Windows")]
-[assembly: AssemblyProduct("Win8ShooterGame.Windows")]
+[assembly: AssemblyTitle("ShooterTutorial")]
+[assembly: AssemblyProduct("ShooterTutorial")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyCompany("")]
