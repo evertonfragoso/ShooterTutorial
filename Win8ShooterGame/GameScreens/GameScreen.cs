@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 //using System.Linq;
 //using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -432,8 +434,9 @@ namespace ShooterTutorial.GameScreens
         private void AddExplosion(Vector2 enemyPosition)
         {
             Animation explosionAnimation = new Animation();
+            Vector2 position = new Vector2(enemyPosition.X * 0.85f, enemyPosition.Y * 0.9f);
 
-            explosionAnimation.Initialize(explosionTexture, enemyPosition,
+            explosionAnimation.Initialize(explosionTexture, position,
                                     134, 134, 12, 30, Color.White, 1.0f, true);
 
             Explosion explosion = new Explosion();
@@ -499,6 +502,7 @@ namespace ShooterTutorial.GameScreens
                     if (_player.Health <= 0)
                     {
                         _player.Active = false;
+
                         /* TODO: Add transition or fade out */
                         ScreenManager.GotoScreen(GameOverScreen.SCREEN_NAME);
                     }

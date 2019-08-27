@@ -16,13 +16,15 @@ namespace ShooterTutorial.GameObjects.Buttons
         protected static SpriteFont _spriteFont;
         protected static Vector2 _buttonSize;
         protected static string _buttonText;
+        protected static Color _frontColor;
+        protected static Color _backColor;
 
-        private static Vector2 buttonPosition;
+        private static Vector2 _buttonPosition;
 
         public Vector2 ButtonPosition
         {
-            get => buttonPosition;
-            set => buttonPosition = value;
+            get => _buttonPosition;
+            set => _buttonPosition = value;
         }
 
         public BaseButton(GraphicsDevice device, ContentManager content, SpriteBatch spriteBatch)
@@ -44,14 +46,15 @@ namespace ShooterTutorial.GameObjects.Buttons
         public static bool IsHoverButton()
         {
             Point mousePosition = Mouse.GetState().Position;
-            float buttonWidth = buttonPosition.X + _spriteFont.MeasureString(_buttonText).X;
-            float buttonHeight = buttonPosition.Y + _spriteFont.MeasureString(_buttonText).Y;
+            Vector2 spriteFontMeasure = _spriteFont.MeasureString(_buttonText);
+            float buttonWidth = _buttonPosition.X + spriteFontMeasure.X;
+            float buttonHeight = _buttonPosition.Y + spriteFontMeasure.Y;
 
             return
                 mousePosition.X < buttonWidth &&
-                mousePosition.X > buttonPosition.X &&
+                mousePosition.X > _buttonPosition.X &&
                 mousePosition.Y < buttonHeight &&
-                mousePosition.Y > buttonPosition.Y;
+                mousePosition.Y > _buttonPosition.Y;
         }
 
         public virtual void Update(GameTime gameTime)
@@ -60,6 +63,34 @@ namespace ShooterTutorial.GameObjects.Buttons
 
         public virtual void Draw()
         {
+            SpriteEffects spriteEffects = SpriteEffects.None;
+            Vector2 origin = Vector2.Zero;
+            float layerDepth = 1f;
+            float rotation = 0;
+            float scale = 1f;
+
+            // Button outline
+            if (IsHoverButton())
+            {
+                _spriteBatch.DrawString(_spriteFont, _buttonText,
+                    ButtonPosition + new Vector2( 1 * scale,  1 * scale),
+                    _backColor, rotation, origin, scale, spriteEffects,
+                    layerDepth);
+                _spriteBatch.DrawString(_spriteFont, _buttonText,
+                    ButtonPosition + new Vector2(-1 * scale,  1 * scale),
+                    _backColor, rotation, origin, scale, spriteEffects,
+                    layerDepth);
+                _spriteBatch.DrawString(_spriteFont, _buttonText,
+                    ButtonPosition + new Vector2(-1 * scale, -1 * scale),
+                    _backColor, rotation, origin, scale, spriteEffects,
+                    layerDepth);
+                _spriteBatch.DrawString(_spriteFont, _buttonText,
+                    ButtonPosition + new Vector2( 1 * scale, -1 * scale),
+                    _backColor, rotation, origin, scale, spriteEffects,
+                    layerDepth);
+            }
+
+            _spriteBatch.DrawString(_spriteFont, _buttonText, ButtonPosition, _frontColor);
         }
 
         // END

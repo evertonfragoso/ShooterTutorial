@@ -42,6 +42,8 @@ namespace ShooterTutorial
         /// </summary>
         protected override void Initialize()
         {
+            //System.Diagnostics.Debug.WriteLine("graphics {0}", graphics);
+
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
