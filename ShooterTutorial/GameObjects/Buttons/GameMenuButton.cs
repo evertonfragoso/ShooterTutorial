@@ -9,19 +9,16 @@ namespace ShooterTutorial.GameObjects.Buttons
     {
         public BaseButton Button;
 
-        public static Vector2 Position;
         public static string Text;
 
-        public void Initialize(BaseButton baseButton, Vector2 position)
+        public void Initialize(BaseButton baseButton)
         {
             Button = baseButton;
-            Position = position;
             Text = "MENU";
         }
 
         public void Update(GameTime gameTime)
         {
-            Button.Position = Position;
             Button.Update(gameTime);
         }
 

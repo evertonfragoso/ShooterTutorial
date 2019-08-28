@@ -17,8 +17,6 @@ namespace ShooterTutorial.GameScreens
 {
     public class GameScreen : BaseScreen
     {
-        public const string SCREEN_NAME = "gameScreen";
-
         // A movement speed for the player
         private const float PlayerMoveSpeed = 8;
 
@@ -78,9 +76,17 @@ namespace ShooterTutorial.GameScreens
         // A random number generator
         private static Random random;
 
-        public GameScreen(GraphicsDevice device, ContentManager content, SpriteBatch spriteBatch)
-            : base(device, content, spriteBatch, SCREEN_NAME)
+        private const string SCREEN_NAME = "gameScreen";
+
+        public GameScreen() : base(null, null, null)
         {
+            Name = SCREEN_NAME;
+        }
+
+        public GameScreen(GraphicsDevice device, ContentManager content, SpriteBatch spriteBatch)
+            : base(device, content, spriteBatch)
+        {
+            Name = SCREEN_NAME;
         }
 
         public override bool Initialize()
@@ -212,7 +218,8 @@ namespace ShooterTutorial.GameScreens
             // Check if ESC is pressed and go to GameOver screen
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
-                ScreenManager.GotoScreen(GameOverScreen.SCREEN_NAME);
+
+                ScreenManager.GotoScreen(new GameOverScreen().Name);
             }
 
             base.Update(gameTime);
@@ -503,7 +510,7 @@ namespace ShooterTutorial.GameScreens
                         _player.Active = false;
 
                         /* TODO: Add transition or fade out */
-                        ScreenManager.GotoScreen(GameOverScreen.SCREEN_NAME);
+                        ScreenManager.GotoScreen(new GameOverScreen().Name);
                     }
                 }
 

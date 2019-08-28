@@ -9,7 +9,6 @@ namespace ShooterTutorial.GameObjects.Buttons
     {
         public BaseButton Button;
 
-        public Vector2 Position;
         public string Text;
 
         public GameStartButton()
@@ -17,15 +16,13 @@ namespace ShooterTutorial.GameObjects.Buttons
             Text = "NEW GAME";
         }
 
-        public void Initialize(BaseButton baseButton, Vector2 position)
+        public void Initialize(BaseButton baseButton)
         {
             Button = baseButton;
-            Position = position;
         }
 
         public void Update(GameTime gameTime)
         {
-            Button.Position = Position;
             Button.Update(gameTime);
         }
 

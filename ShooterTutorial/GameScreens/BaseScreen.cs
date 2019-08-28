@@ -14,9 +14,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-
-using ShooterTutorial.GameObjects.Buttons;
 
 namespace ShooterTutorial.GameScreens
 {
@@ -31,10 +28,8 @@ namespace ShooterTutorial.GameScreens
         /// <summary>
         /// Screen Constructor
         /// </summary>
-        /// <param name="name">Must be unique since when you use ScreenManager is per name</param>
-        public BaseScreen(GraphicsDevice device, ContentManager content, SpriteBatch spriteBatch, string name)
+        public BaseScreen(GraphicsDevice device, ContentManager content, SpriteBatch spriteBatch)
         {
-            Name = name;
             _device = device;
             _content = content;
             _spriteBatch = spriteBatch;

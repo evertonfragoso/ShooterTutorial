@@ -66,6 +66,7 @@
     <Compile Include="GameObjects\Buttons\GameStartButton.cs" />
     <Compile Include="GameObjects\Buttons\GameMenuButton.cs" />
     <Compile Include="GameObjects\Buttons\GameExitButton.cs" />
+    <Compile Include="GameObjects\MenuButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico" />

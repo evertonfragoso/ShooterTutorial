@@ -9,13 +9,13 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
 //using Microsoft.Xna.Framework.Media;
 
-using ShooterTutorial.GameObjects.Buttons;
+//using ShooterTutorial.GameObjects.Buttons;
 
 namespace ShooterTutorial.GameScreens
 {
     public class GameOverScreen : BaseScreen
     {
-        private Texture2D texture;
+        private Texture2D backgroundTexture;
         private Rectangle destinationRectangle;
         //private Song menuMusic;
 
@@ -24,20 +24,26 @@ namespace ShooterTutorial.GameScreens
         //private int _screen_height;
         //private int _screen_width;
 
-        public const string SCREEN_NAME = "gameOverScreen";
+        private const string SCREEN_NAME = "gameOverScreen";
 
-        public GameOverScreen(GraphicsDevice device, ContentManager content, SpriteBatch spriteBatch)
-            : base(device, content, spriteBatch, SCREEN_NAME)
+        public GameOverScreen() : base(null, null, null)
         {
+            Name = SCREEN_NAME;
+        }
+
+        public GameOverScreen(GraphicsDevice device, ContentManager content,
+            SpriteBatch spriteBatch) : base(device, content, spriteBatch)
+        {
+            Name = SCREEN_NAME;
         }
 
         public override bool Initialize()
         {
             ShooterTutorialGame.MouseVisibility = true;
 
-            texture = _content.Load<Texture2D>("Graphics\\endMenu");
+            backgroundTexture = _content.Load<Texture2D>("Graphics\\endMenu");
             destinationRectangle = new Rectangle(0, 0,
-                                        texture.Width, _device.Viewport.Height);
+                backgroundTexture.Width, _device.Viewport.Height);
 
             //_menuButton = new GameMenuButton(_device, _content, _spriteBatch);
             //_menuButton..PPosition = new Vector2(360, 300);
@@ -62,7 +68,7 @@ namespace ShooterTutorial.GameScreens
 
         public override void Update(GameTime gameTime)
         {
-            //if (BaseButton.IsHoverButton() &&
+            //if (BaseButton.IsMouseHoverButton() &&
             //    ButtonState.Pressed == Mouse.GetState().LeftButton)
             //{
             //    ScreenManager.GotoScreen(MenuScreen.SCREEN_NAME);
@@ -73,7 +79,7 @@ namespace ShooterTutorial.GameScreens
 
         public override void Draw(GameTime gameTime)
         {
-            _spriteBatch.Draw(texture, destinationRectangle, Color.White);
+            _spriteBatch.Draw(backgroundTexture, destinationRectangle, Color.White);
             //_menuButton.Draw();
 
             base.Draw(gameTime);

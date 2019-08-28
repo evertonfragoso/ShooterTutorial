@@ -47,19 +47,19 @@ namespace ShooterTutorial.GameObjects.Buttons
         /// <summary>
         /// Return true if a player clicks the button with mouse
         ///</summary>
-        public bool IsHoverButton()
-        {
-            Point mousePosition = Mouse.GetState().Position;
-            Vector2 spriteFontMeasure = _spriteFont.MeasureString(Text);
-            float buttonWidth = Position.X + spriteFontMeasure.X;
-            float buttonHeight = Position.Y + spriteFontMeasure.Y;
+        //public bool IsHoverButton()
+        //{
+        //    Point mousePosition = Mouse.GetState().Position;
+        //    Vector2 spriteFontMeasure = _spriteFont.MeasureString(Text);
+        //    float buttonWidth = Position.X + spriteFontMeasure.X;
+        //    float buttonHeight = Position.Y + spriteFontMeasure.Y;
 
-            return
-                mousePosition.X < buttonWidth &&
-                mousePosition.X > Position.X &&
-                mousePosition.Y < buttonHeight &&
-                mousePosition.Y > Position.Y;
-        }
+        //    return
+        //        mousePosition.X < buttonWidth &&
+        //        mousePosition.X > Position.X &&
+        //        mousePosition.Y < buttonHeight &&
+        //        mousePosition.Y > Position.Y;
+        //}
 
         public virtual void Update(GameTime gameTime)
         {

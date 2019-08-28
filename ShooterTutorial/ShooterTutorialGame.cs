@@ -3,7 +3,7 @@
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
+//using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 
 using ShooterTutorial.GameScreens;
@@ -48,12 +48,17 @@ namespace ShooterTutorial
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // Initialize screen manager and add screens to it
-            ScreenManager.AddScreen(new MenuScreen(GraphicsDevice, Content, spriteBatch));
-            ScreenManager.AddScreen(new GameScreen(GraphicsDevice, Content, spriteBatch));
-            ScreenManager.AddScreen(new GameOverScreen(GraphicsDevice, Content, spriteBatch));
+            BaseScreen menuScreen = new MenuScreen(GraphicsDevice, Content, spriteBatch);
+            ScreenManager.AddScreen(menuScreen);
+
+            BaseScreen gameScreen = new GameScreen(GraphicsDevice, Content, spriteBatch);
+            ScreenManager.AddScreen(gameScreen);
+
+            BaseScreen gameOverScreen = new GameOverScreen(GraphicsDevice, Content, spriteBatch);
+            ScreenManager.AddScreen(gameOverScreen);
 
             // Set the active screen to the game menu
-            ScreenManager.GotoScreen(MenuScreen.SCREEN_NAME);
+            ScreenManager.GotoScreen(menuScreen.Name);
 
             ScreenManager.Initialize();
 
@@ -90,10 +95,6 @@ namespace ShooterTutorial
         protected override void Update(GameTime gameTime)
         {
             IsMouseVisible = MouseVisibility;
-
-            /* TODO: Update ESC to pause and open in-game menu instead of close */
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
 
             ScreenManager.Update(gameTime);
             base.Update(gameTime);
