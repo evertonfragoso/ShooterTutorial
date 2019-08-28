@@ -1,4 +1,4 @@
-﻿using System;
+﻿//using System;
 //using System.Collections.Generic;
 //using System.Linq;
 //using System.Text;
@@ -77,8 +77,7 @@ namespace ShooterTutorial.GameScreens
 
             if (_exitButton.Clicked() || Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
-                /* TODO: find a better way to do that */
-                Environment.Exit(0);
+                QuitGame();
                 return;
             }
 

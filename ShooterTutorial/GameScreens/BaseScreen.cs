@@ -7,10 +7,11 @@
  * credit for it that's cool but not mandatory
 /************************************************************************/
 
-//using System;
+using System;
 //using System.Collections.Generic;
 //using System.Linq;
 //using System.Text;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -68,6 +69,12 @@ namespace ShooterTutorial.GameScreens
 
         public virtual void UnloadContent()
         {
+        }
+
+        protected void QuitGame()
+        {
+            /* TODO: find a better way to do that */
+            Environment.Exit(0);
         }
     }
 }

@@ -4,12 +4,12 @@
 //using System.Text;
 
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 //using Microsoft.Xna.Framework.Media;
 
-//using ShooterTutorial.GameObjects.Buttons;
+using ShooterTutorial.GameObjects;
 
 namespace ShooterTutorial.GameScreens
 {
@@ -19,7 +19,7 @@ namespace ShooterTutorial.GameScreens
         private Rectangle destinationRectangle;
         //private Song menuMusic;
 
-        //private static GameMenuButton _menuButton;
+        private static MenuButton _menuButton;
 
         //private int _screen_height;
         //private int _screen_width;
@@ -45,9 +45,10 @@ namespace ShooterTutorial.GameScreens
             destinationRectangle = new Rectangle(0, 0,
                 backgroundTexture.Width, _device.Viewport.Height);
 
-            //_menuButton = new GameMenuButton(_device, _content, _spriteBatch);
-            //_menuButton..PPosition = new Vector2(360, 300);
-            //_menuButton.Initialize();
+            SpriteFont spriteFont = _content.Load<SpriteFont>("Graphics\\gameFont");
+
+            _menuButton = new MenuButton(spriteFont);
+            _menuButton.Initialize("MENU", new Vector2(360, 300));
 
             //menuMusic = _content.Load<Song>("Sounds\\menuMusic");
             //MediaPlayer.Play(menuMusic);
@@ -68,11 +69,8 @@ namespace ShooterTutorial.GameScreens
 
         public override void Update(GameTime gameTime)
         {
-            //if (BaseButton.IsMouseHoverButton() &&
-            //    ButtonState.Pressed == Mouse.GetState().LeftButton)
-            //{
-            //    ScreenManager.GotoScreen(MenuScreen.SCREEN_NAME);
-            //}
+            if (_menuButton.Clicked())
+                ScreenManager.GotoScreen(new MenuScreen().Name);
 
             base.Update(gameTime);
         }
@@ -80,7 +78,7 @@ namespace ShooterTutorial.GameScreens
         public override void Draw(GameTime gameTime)
         {
             _spriteBatch.Draw(backgroundTexture, destinationRectangle, Color.White);
-            //_menuButton.Draw();
+            _menuButton.Draw(_spriteBatch);
 
             base.Draw(gameTime);
         }
