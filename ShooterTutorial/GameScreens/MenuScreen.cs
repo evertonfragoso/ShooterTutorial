@@ -73,7 +73,7 @@ namespace ShooterTutorial.GameScreens
         public override void Update(GameTime gameTime)
         {
             if (_startButton.Clicked())
-                ScreenManager.GotoScreen(new GameScreen().Name);
+                ScreenManager.GotoScreen(new LevelOneGameScreen());
 
             if (_exitButton.Clicked() || Keyboard.GetState().IsKeyDown(Keys.Escape))
             {

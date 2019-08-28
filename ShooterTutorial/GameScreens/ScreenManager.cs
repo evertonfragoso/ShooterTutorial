@@ -61,12 +61,12 @@ namespace ShooterTutorial.GameScreens
         /// <summary>
         /// Go to screen
         /// </summary>
-        /// <param name="name">Screen name</param>
-        public static void GotoScreen(string name)
+        /// <param name="destinationScreen">Screen name</param>
+        public static void GotoScreen(BaseScreen destinationScreen)
         {
             foreach (BaseScreen screen in _screens)
             {
-                if (screen.Name == name)
+                if (screen.Name == destinationScreen.Name)
                 {
                     // Shutdown previous screen
                     _previous = ActiveScreen;
@@ -104,7 +104,7 @@ namespace ShooterTutorial.GameScreens
         {
             if (_previous != null)
             {
-                GotoScreen(_previous.Name);
+                GotoScreen(_previous);
                 return;
             }
         }

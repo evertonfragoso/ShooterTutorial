@@ -70,7 +70,7 @@ namespace ShooterTutorial.GameScreens
         public override void Update(GameTime gameTime)
         {
             if (_menuButton.Clicked())
-                ScreenManager.GotoScreen(new MenuScreen().Name);
+                ScreenManager.GotoScreen(new MenuScreen());
 
             base.Update(gameTime);
         }

@@ -59,10 +59,11 @@
     <Compile Include="GameObjects\Explosion.cs" />
     <Compile Include="GameScreens\MenuScreen.cs" />
     <Compile Include="GameScreens\GameOverScreen.cs" />
-    <Compile Include="GameScreens\GameScreen.cs" />
+    <Compile Include="GameScreens\LevelOneGameScreen.cs" />
     <Compile Include="GameScreens\BaseScreen.cs" />
     <Compile Include="GameScreens\ScreenManager.cs" />
     <Compile Include="GameObjects\MenuButton.cs" />
+    <Compile Include="GameObjects\Score.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico" />

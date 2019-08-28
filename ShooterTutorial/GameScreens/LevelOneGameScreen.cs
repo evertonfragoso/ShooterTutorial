@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 //using System.Linq;
-//using System.Text;
+using System.Text;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -15,8 +15,12 @@ using ShooterTutorial.GameObjects;
 
 namespace ShooterTutorial.GameScreens
 {
-    public class GameScreen : BaseScreen
+    public class LevelOneGameScreen : BaseScreen
     {
+        #region members
+
+        private static SpriteFont _spriteFont;
+
         // A movement speed for the player
         private const float PlayerMoveSpeed = 8;
 
@@ -78,13 +82,15 @@ namespace ShooterTutorial.GameScreens
 
         private const string SCREEN_NAME = "gameScreen";
 
-        public GameScreen() : base(null, null, null)
+        #endregion members
+
+        public LevelOneGameScreen() : base(null, null, null)
         {
             Name = SCREEN_NAME;
         }
 
-        public GameScreen(GraphicsDevice device, ContentManager content, SpriteBatch spriteBatch)
-            : base(device, content, spriteBatch)
+        public LevelOneGameScreen(GraphicsDevice device, ContentManager content,
+            SpriteBatch spriteBatch) : base(device, content, spriteBatch)
         {
             Name = SCREEN_NAME;
         }
@@ -92,6 +98,8 @@ namespace ShooterTutorial.GameScreens
         public override bool Initialize()
         {
             ShooterTutorialGame.MouseVisibility = false;
+
+            _spriteFont = _content.Load<SpriteFont>("Graphics\\gameFont");
 
             // Load the player resources
             Rectangle titleSafeArea = _device.Viewport.TitleSafeArea;
@@ -215,11 +223,10 @@ namespace ShooterTutorial.GameScreens
             // Update the collision
             UpdateCollision();
 
-            // Check if ESC is pressed and go to GameOver screen
+            /* TODO: Pause game instead of send to GameOverScreen */
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
-
-                ScreenManager.GotoScreen(new GameOverScreen().Name);
+                ScreenManager.GotoScreen(new GameOverScreen());
             }
 
             base.Update(gameTime);
@@ -254,6 +261,22 @@ namespace ShooterTutorial.GameScreens
             {
                 explosions[e].Draw(_spriteBatch);
             }
+
+            StringBuilder showLives = new StringBuilder("Lives " + _player.Lives);
+            Vector2 showLivesPosition = new Vector2(10, _device.Viewport.Height - 40);
+            _spriteBatch.DrawString(_spriteFont, showLives, showLivesPosition, Color.Red, 0, Vector2.Zero, 0.5f, SpriteEffects.None, 1f);
+
+            Rectangle lifeBar = new Rectangle(10, _device.Viewport.Height - 10, _player.Health * 2, 10);
+            Color[] data = new Color[lifeBar.Width * lifeBar.Height];
+            Texture2D rectTexture = new Texture2D(_device, lifeBar.Width, lifeBar.Height);
+            for (int i = 0; i < data.Length; ++i) data[i] = Color.Red;
+            rectTexture.SetData(data);
+            Vector2 position = new Vector2(lifeBar.Left, lifeBar.Top);
+            _spriteBatch.Draw(rectTexture, position, Color.White);
+
+            StringBuilder showScore = new StringBuilder("Score " + _player.Score.LevelOneScore);
+            Vector2 showScorePosition = new Vector2(_device.Viewport.Width - _spriteFont.MeasureString(showScore).X, _device.Viewport.Height - 20);
+            _spriteBatch.DrawString(_spriteFont, showScore, showScorePosition, Color.Red, 0, Vector2.Zero, 0.5f, SpriteEffects.None, 1f);
 
             base.Draw(gameTime);
         }
@@ -454,7 +477,7 @@ namespace ShooterTutorial.GameScreens
             explosionSound.Play();
         }
 
-        public void UpdateExplosions(GameTime gameTime)
+        private void UpdateExplosions(GameTime gameTime)
         {
             for (int e = 0; e < explosions.Count; e++)
             {
@@ -507,10 +530,13 @@ namespace ShooterTutorial.GameScreens
                     // If the player health is less than zero we died
                     if (_player.Health <= 0)
                     {
-                        _player.Active = false;
+                        _player.Die();
 
-                        /* TODO: Add transition or fade out */
-                        ScreenManager.GotoScreen(new GameOverScreen().Name);
+                        if (_player.Active == false)
+                        {
+                            /* TODO: Add transition or fade out */
+                            ScreenManager.GotoScreen(new GameOverScreen());
+                        }
                     }
                 }
 
@@ -535,14 +561,12 @@ namespace ShooterTutorial.GameScreens
                             // Add explosion where the enemy was
                             AddExplosion(enemies[e].Position);
 
-                            /* TODO: record the kill */
-                            //myGame.Stage.EnemiesKilled++;
-
                             laserBeams[lb].Active = false;
                             enemies[e].Active = false;
 
-                            /* TODO: Record the score */
-                            //myGame.Score += e.Value;
+                            _player.Score.TotalEnemiesKilled++;
+                            _player.Score.TotalScore += enemies[e].Value;
+                            _player.Score.LevelOneScore += enemies[e].Value;
                         }
                     }
                 }

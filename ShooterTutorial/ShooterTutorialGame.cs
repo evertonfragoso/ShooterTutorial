@@ -51,14 +51,14 @@ namespace ShooterTutorial
             BaseScreen menuScreen = new MenuScreen(GraphicsDevice, Content, spriteBatch);
             ScreenManager.AddScreen(menuScreen);
 
-            BaseScreen gameScreen = new GameScreen(GraphicsDevice, Content, spriteBatch);
+            BaseScreen gameScreen = new LevelOneGameScreen(GraphicsDevice, Content, spriteBatch);
             ScreenManager.AddScreen(gameScreen);
 
             BaseScreen gameOverScreen = new GameOverScreen(GraphicsDevice, Content, spriteBatch);
             ScreenManager.AddScreen(gameOverScreen);
 
             // Set the active screen to the game menu
-            ScreenManager.GotoScreen(menuScreen.Name);
+            ScreenManager.GotoScreen(menuScreen);
 
             ScreenManager.Initialize();
 
