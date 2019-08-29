@@ -64,6 +64,7 @@
     <Compile Include="GameScreens\ScreenManager.cs" />
     <Compile Include="GameObjects\MenuButton.cs" />
     <Compile Include="GameObjects\Score.cs" />
+    <Compile Include="Primitives2D.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico" />
