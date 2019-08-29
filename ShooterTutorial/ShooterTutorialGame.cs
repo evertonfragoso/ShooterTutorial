@@ -91,8 +91,6 @@ namespace ShooterTutorial
         protected override void UnloadContent()
         {
             ScreenManager.UnloadContent();
-            graphics.Dispose();
-            spriteBatch.Dispose();
         }
 
         /// <summary>

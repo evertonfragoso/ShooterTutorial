@@ -11,28 +11,28 @@ namespace ShooterTutorial
         public Texture2D spriteStrip;
 
         // The scale used to display the sprite strip
-        public float scale;
+        public float Scale;
 
         // The time since we last updated the frame
-        public int elapsedTime;
+        public int ElapsedTime;
 
         // The time we display a frame until the next one
-        public int frameTime;
+        public int FrameTime;
 
         // The number of frames that the animation contains
-        public int frameCount;
+        public int FrameCount;
 
         // The index of the current frame we are displaying
-        public int currentFrame;
+        public int CurrentFrame;
 
         // The color of the frame we will be displaying
-        public Color color;
+        public Color Color;
 
         // The area of the image strip we want to display
-        public Rectangle sourceRect = new Rectangle();
+        public Rectangle SourceRect = new Rectangle();
 
         // The area where we want to display the image strip in the game
-        public Rectangle destinationRect = new Rectangle();
+        public Rectangle DestinationRect = new Rectangle();
 
         // Width of a given frame
         public int FrameWidth;
@@ -55,23 +55,23 @@ namespace ShooterTutorial
                                 Color color, float scale, bool looping)
         {
             // Keep a local copy of the values passed in
-            this.color = color;
-            this.FrameWidth = frameWidth;
-            this.FrameHeight = frameHeight;
-            this.frameCount = frameCount;
-            this.frameTime = frametime;
-            this.scale = scale;
+            Color = color;
+            FrameWidth = frameWidth;
+            FrameHeight = frameHeight;
+            FrameCount = frameCount;
+            FrameTime = frametime;
+            Scale = scale;
 
-            this.Looping = looping;
-            this.Position = position;
-            this.spriteStrip = texture;
+            Looping = looping;
+            Position = position;
+            spriteStrip = texture;
 
             // Set the time to zero
-            this.elapsedTime = 0;
-            this.currentFrame = 0;
+            ElapsedTime = 0;
+            CurrentFrame = 0;
 
             // Set the Animation to active by default
-            this.Active = true;
+            Active = true;
         }
 
         public void Update(GameTime gameTime)
@@ -80,43 +80,42 @@ namespace ShooterTutorial
             if (Active == false) return;
 
             // Update the elapsed time
-            elapsedTime += (int)gameTime.ElapsedGameTime.TotalMilliseconds;
+            ElapsedTime += (int)gameTime.ElapsedGameTime.TotalMilliseconds;
 
             // If the elapsed time is larger than the frame time we need to
             // switch frames
-            if (elapsedTime > frameTime)
+            if (ElapsedTime > FrameTime)
             {
                 // Move to the next frame
-                currentFrame++;
+                CurrentFrame++;
 
-                // If the currentFrame is equal to frameCount reset
-                // currentFrame to zero
-                if (currentFrame == frameCount)
+                // If the CurrentFrame is equal to FrameCount reset
+                // CurrentFrame to zero
+                if (CurrentFrame == FrameCount)
                 {
-                    currentFrame = 0;
+                    CurrentFrame = 0;
                     // If we are not looping deactivate the animation
-                    if (Looping == false)
-                        Active = false;
+                    Active &= Looping != false;
                 }
 
                 // Reset the elapsed time to zero
-                elapsedTime = 0;
+                ElapsedTime = 0;
             }
 
             // Grab the correct frame in the image strip by multiplying
-            // the currentFrame index by the Frame width
-            sourceRect = new Rectangle(currentFrame * FrameWidth, 0,
+            // the CurrentFrame index by the Frame width
+            SourceRect = new Rectangle(CurrentFrame * FrameWidth, 0,
                                         FrameWidth, FrameHeight);
 
             // Grab the correct frame in the image strip by multiplying
-            // the currentFrame index by the frame width
-            destinationRect = new Rectangle(
+            // the CurrentFrame index by the frame width
+            DestinationRect = new Rectangle(
                 (int)Position.X,
                 (int)Position.Y,
                 //(int)Position.X - (int)(FrameWidth * scale) / 2,
                 //(int)Position.Y - (int)(FrameHeight * scale) / 2,
-                (int)(FrameWidth * scale),
-                (int)(FrameHeight * scale)
+                (int)(FrameWidth * Scale),
+                (int)(FrameHeight * Scale)
             );
         }
 
@@ -125,7 +124,7 @@ namespace ShooterTutorial
             // Only draw the animation when we are active
             if (Active)
             {
-                spriteBatch.Draw(spriteStrip, destinationRect, sourceRect, color);
+                spriteBatch.Draw(spriteStrip, DestinationRect, SourceRect, Color);
             }
         }
     }

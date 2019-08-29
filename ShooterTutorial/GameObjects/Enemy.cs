@@ -78,12 +78,9 @@ namespace ShooterTutorial.GameObjects
 
             // The enemy is past the screen or its health reaches 0 then
             // deactivate it
-            if (Position.X < -Width || Health <= 0)
-            {
-                // By setting the Active flag to false, the game will remove
-                // this object from the game list
-                Active = false;
-            }
+            // By setting the Active flag to false, the game will remove
+            // this object from the game list
+            Active &= (Position.X >= -Width) && (Health > 0);
         }
 
         public void Draw(SpriteBatch spriteBatch)

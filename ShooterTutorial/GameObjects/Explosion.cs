@@ -32,10 +32,7 @@ namespace ShooterTutorial.GameObjects
             explosionAnimation.Update(gameTime);
             timeToLive -= 1;
 
-            if (timeToLive <= 0)
-            {
-                Active = false;
-            }
+            Active &= timeToLive > 0;
         }
 
         public void Draw(SpriteBatch spriteBatch)
