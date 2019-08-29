@@ -106,7 +106,8 @@ namespace ShooterTutorial.GameScreens
                 115, 69, 8, 30, Color.White, Scale, true);
 
             // Initialize the player class
-            _player = new Player();
+            ShooterTutorialGame.GamePlayer = new Player();
+            _player = ShooterTutorialGame.GamePlayer;
             _player.Initialize(playerAnimation, playerPosition);
 
             // Background

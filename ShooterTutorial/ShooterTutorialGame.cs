@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 using ShooterTutorial.GameScreens;
+using ShooterTutorial.GameObjects;
 
 #endregion
 
@@ -23,8 +24,9 @@ namespace ShooterTutorial
         private SpriteBatch spriteBatch;
 
         public static bool MouseVisibility = true;
-
         public static bool QuitGame;
+
+        public static Player GamePlayer;
 
         #endregion
 
