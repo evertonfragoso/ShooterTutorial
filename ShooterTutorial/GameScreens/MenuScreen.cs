@@ -77,7 +77,7 @@ namespace ShooterTutorial.GameScreens
 
             if (_exitButton.Clicked() || Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
-                QuitGame();
+                ShooterTutorialGame.QuitGame = true;
                 return;
             }
 

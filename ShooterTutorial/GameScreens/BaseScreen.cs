@@ -70,11 +70,5 @@ namespace ShooterTutorial.GameScreens
         public virtual void UnloadContent()
         {
         }
-
-        protected void QuitGame()
-        {
-            /* TODO: find a better way to do that */
-            Environment.Exit(0);
-        }
     }
 }

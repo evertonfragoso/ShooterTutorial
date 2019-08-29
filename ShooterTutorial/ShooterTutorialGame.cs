@@ -1,4 +1,5 @@
-﻿//using System;
+﻿#region Usings
+//using System;
 //using System.Collections.Generic;
 
 using Microsoft.Xna.Framework;
@@ -8,6 +9,8 @@ using Microsoft.Xna.Framework.Input;
 
 using ShooterTutorial.GameScreens;
 
+#endregion
+
 namespace ShooterTutorial
 {
     /// <summary>
@@ -15,6 +18,8 @@ namespace ShooterTutorial
     /// </summary>
     public class ShooterTutorialGame : Game
     {
+        #region Members
+
         private const int DEFAULT_SCREEN_WIDTH = 800;
         private const int DEFAULT_SCREEN_HEIGHT = 480;
 
@@ -22,6 +27,10 @@ namespace ShooterTutorial
         private SpriteBatch spriteBatch;
 
         public static bool MouseVisibility = true;
+
+        public static bool QuitGame;
+
+        #endregion
 
         public ShooterTutorialGame()
         {
@@ -93,6 +102,12 @@ namespace ShooterTutorial
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            if (QuitGame)
+            {
+                Exit();
+                return;
+            }
+
             IsMouseVisible = MouseVisibility;
 
             ScreenManager.Update(gameTime);
