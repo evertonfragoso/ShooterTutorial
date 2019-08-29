@@ -2,7 +2,6 @@
 
 using System;
 using System.Collections.Generic;
-//using System.Linq;
 using System.Text;
 
 using Microsoft.Xna.Framework;
@@ -81,20 +80,14 @@ namespace ShooterTutorial.GameScreens
         // A random number generator
         private static Random random;
 
-        private const string SCREEN_NAME = "gameScreen";
+        protected override void SetScreenName() => SCREEN_NAME = "gameScreen";
 
         #endregion members
 
-        public LevelOneGameScreen() : base(null, null, null)
-        {
-            Name = SCREEN_NAME;
-        }
+        public LevelOneGameScreen() : base(null, null, null) { }
 
         public LevelOneGameScreen(GraphicsDevice device, ContentManager content,
-            SpriteBatch spriteBatch) : base(device, content, spriteBatch)
-        {
-            Name = SCREEN_NAME;
-        }
+            SpriteBatch spriteBatch) : base(device, content, spriteBatch) { }
 
         public override bool Initialize()
         {
@@ -171,7 +164,6 @@ namespace ShooterTutorial.GameScreens
 
             // Load the BGM
             //gameMusic = _content.Load<Song>("Sounds\\gameMusic");
-
             //MediaPlayer.Play(gameMusic);
 
             return base.Initialize();

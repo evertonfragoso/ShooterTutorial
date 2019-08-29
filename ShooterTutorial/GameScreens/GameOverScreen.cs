@@ -1,12 +1,6 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 //using Microsoft.Xna.Framework.Media;
 
 using ShooterTutorial.GameObjects;
@@ -16,39 +10,33 @@ namespace ShooterTutorial.GameScreens
     public class GameOverScreen : BaseScreen
     {
         private Texture2D backgroundTexture;
-        private Rectangle destinationRectangle;
+        private Rectangle backgroundRectangle;
         //private Song menuMusic;
 
         private static MenuButton _menuButton;
 
-        //private int _screen_height;
-        //private int _screen_width;
+        private const string MENU_BUTTON_TEXT = "MENU";
 
-        private const string SCREEN_NAME = "gameOverScreen";
+        protected override void SetScreenName() => SCREEN_NAME = "gameOverScreen";
 
-        public GameOverScreen() : base(null, null, null)
-        {
-            Name = SCREEN_NAME;
-        }
+        public GameOverScreen() : base(null, null, null) { }
 
         public GameOverScreen(GraphicsDevice device, ContentManager content,
-            SpriteBatch spriteBatch) : base(device, content, spriteBatch)
-        {
-            Name = SCREEN_NAME;
-        }
+            SpriteBatch spriteBatch) : base(device, content, spriteBatch) { }
 
         public override bool Initialize()
         {
             ShooterTutorialGame.MouseVisibility = true;
 
             backgroundTexture = _content.Load<Texture2D>("Graphics\\endMenu");
-            destinationRectangle = new Rectangle(0, 0,
+            backgroundRectangle = new Rectangle(0, 0,
                 backgroundTexture.Width, _device.Viewport.Height);
 
             SpriteFont spriteFont = _content.Load<SpriteFont>("Graphics\\gameFont");
 
             _menuButton = new MenuButton(spriteFont);
-            _menuButton.Initialize("MENU", new Vector2(360, 300));
+            _menuButton.Initialize(MENU_BUTTON_TEXT, new Vector2(360,
+                _device.Viewport.Height - spriteFont.MeasureString(MENU_BUTTON_TEXT).Y - 10));
 
             //menuMusic = _content.Load<Song>("Sounds\\menuMusic");
             //MediaPlayer.Play(menuMusic);
@@ -77,7 +65,7 @@ namespace ShooterTutorial.GameScreens
 
         public override void Draw(GameTime gameTime)
         {
-            _spriteBatch.Draw(backgroundTexture, destinationRectangle, Color.White);
+            _spriteBatch.Draw(backgroundTexture, backgroundRectangle, Color.White);
             _menuButton.Draw(_spriteBatch);
 
             base.Draw(gameTime);

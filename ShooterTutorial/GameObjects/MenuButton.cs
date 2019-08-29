@@ -1,11 +1,6 @@
-﻿//using System;
-
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
-using ShooterTutorial.GameScreens;
 
 namespace ShooterTutorial.GameObjects
 {
@@ -28,59 +23,61 @@ namespace ShooterTutorial.GameObjects
 
         public void Initialize(string text, Vector2 position)
         {
-            Text = text;
-            Position = position;
-            FrontColor = new Color(255, 255, 255, 0);
-            BackColor = new Color(255, 0, 0, 255);
-
-            Active = true;
+            Color _white = new Color(255, 255, 255, 0);
+            Color _red = new Color(255, 0, 0, 255);
+            Initialize(text, position, _white, _red);
         }
 
-        public void Initialize(string text, Vector2 position, Color frontColor,
-                                Color backColor)
+        public virtual void Initialize(string text, Vector2 position,
+            Color frontColor, Color backColor)
         {
             Text = text;
             Position = position;
             FrontColor = frontColor;
             BackColor = backColor;
-
             Active = true;
         }
 
-        public void Update(GameTime gameTime)
-        {
-        }
+        public void Update(GameTime gameTime) { }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            SpriteEffects spriteEffects = SpriteEffects.None;
-            Vector2 origin = Vector2.Zero;
-            float layerDepth = 1f;
-            float rotation = 0;
             float scale = 1f;
+            float rotation = 0;
+            float layerDepth = 1f;
+            Vector2 origin = Vector2.Zero;
+            SpriteEffects effects = SpriteEffects.None;
 
+            Draw(spriteBatch, rotation, origin, scale, effects, layerDepth);
+        }
+
+        public virtual void Draw(SpriteBatch spriteBatch, float rotation,
+            Vector2 origin, float scale, SpriteEffects effects,
+            float layerDepth)
+        {
             // Button outline
             if (IsMouseHoverButton())
             {
                 spriteBatch.DrawString(_spriteFont, Text,
                     Position + new Vector2(1 * scale, 1 * scale),
-                    BackColor, rotation, origin, scale, spriteEffects,
+                    BackColor, rotation, origin, scale, effects,
                     layerDepth);
                 spriteBatch.DrawString(_spriteFont, Text,
                     Position + new Vector2(-1 * scale, 1 * scale),
-                    BackColor, rotation, origin, scale, spriteEffects,
+                    BackColor, rotation, origin, scale, effects,
                     layerDepth);
                 spriteBatch.DrawString(_spriteFont, Text,
                     Position + new Vector2(-1 * scale, -1 * scale),
-                    BackColor, rotation, origin, scale, spriteEffects,
+                    BackColor, rotation, origin, scale, effects,
                     layerDepth);
                 spriteBatch.DrawString(_spriteFont, Text,
                     Position + new Vector2(1 * scale, -1 * scale),
-                    BackColor, rotation, origin, scale, spriteEffects,
+                    BackColor, rotation, origin, scale, effects,
                     layerDepth);
             }
 
-            spriteBatch.DrawString(_spriteFont, Text, Position, FrontColor);
+            spriteBatch.DrawString(_spriteFont, Text, Position, FrontColor,
+                rotation, origin, scale, effects, layerDepth);
         }
 
         /// <summary>

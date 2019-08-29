@@ -1,4 +1,5 @@
 ﻿using System;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -16,13 +17,12 @@ namespace ShooterTutorial
         private int _screenHeight;
         private int _screenWidth;
 
-        public void Initialize(ContentManager content, String texturePath, int screenWidth, int screenHeight, int speed)
+        public void Initialize(ContentManager content, String texturePath,
+            int screenWidth, int screenHeight, int speed)
         {
             _screenHeight = screenHeight;
             _screenWidth = screenWidth;
-
             _texture = content.Load<Texture2D>(texturePath);
-
             _speed = speed;
 
             // If we divide the screen with the texture width then we can determine the number of tiles needed.
@@ -32,37 +32,23 @@ namespace ShooterTutorial
 
             // Set the initial positions of the parallazing background
             for (int i = 0; i < _positions.Length; i++)
-            {
                 _positions[i] = new Vector2(i * _texture.Width, 0);
-            }
         }
 
         public void Update(GameTime gameTime)
         {
             // Update the positions of the background
             for (int i = 0; i < _positions.Length; i++)
-            {
                 _positions[i].X += _speed;
-            }
 
             for (int i = 0; i < _positions.Length; i++)
-            {
                 if (_speed <= 0)
-                {
                     // Check if the texture is out of view and then put that texture at the end of the screen.
                     if (_positions[i].X <= -_texture.Width)
-                    {
                         WrapTextureToLeft(i);
-                    }
-                }
                 else
-                {
                     if (_positions[i].X >= _texture.Width * (_positions.Length - 1))
-                    {
-                        WrapTextureToRight(i);
-                    }
-                }
-            }
+                    WrapTextureToRight(i);
         }
 
         public void Draw(SpriteBatch spriteBatch)

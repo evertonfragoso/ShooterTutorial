@@ -1,5 +1,4 @@
-﻿//using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace ShooterTutorial.GameObjects
@@ -26,16 +25,10 @@ namespace ShooterTutorial.GameObjects
         public int Value;
 
         // Get the width of the enemy ship
-        public int Width
-        {
-            get { return EnemyAnimation.FrameWidth; }
-        }
+        public int Width => EnemyAnimation.FrameWidth;
 
         // Get the height of the enemy ship
-        public int Height
-        {
-            get { return EnemyAnimation.FrameHeight; }
-        }
+        public int Height => EnemyAnimation.FrameHeight;
 
         // The speed at which the enemy moves
         private float _enemyMoveSpeed;

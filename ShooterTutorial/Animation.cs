@@ -123,9 +123,7 @@ namespace ShooterTutorial
         {
             // Only draw the animation when we are active
             if (Active)
-            {
                 spriteBatch.Draw(spriteStrip, DestinationRect, SourceRect, Color);
-            }
         }
     }
 }

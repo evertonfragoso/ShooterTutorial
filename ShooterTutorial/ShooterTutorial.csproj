@@ -65,6 +65,7 @@
     <Compile Include="GameObjects\MenuButton.cs" />
     <Compile Include="GameObjects\Score.cs" />
     <Compile Include="Primitives2D.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico" />

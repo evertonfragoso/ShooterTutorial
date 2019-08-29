@@ -1,5 +1,4 @@
-﻿//using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace ShooterTutorial.GameObjects
@@ -10,14 +9,8 @@ namespace ShooterTutorial.GameObjects
         Vector2 Position;
         public bool Active;
         int timeToLive;
-        public int Width
-        {
-            get { return explosionAnimation.FrameWidth; }
-        }
-        public int Height
-        {
-            get { return explosionAnimation.FrameHeight; }
-        }
+        public int Width => explosionAnimation.FrameWidth;
+        public int Height => explosionAnimation.FrameHeight;
 
         public void Initialize(Animation animation, Vector2 position)
         {

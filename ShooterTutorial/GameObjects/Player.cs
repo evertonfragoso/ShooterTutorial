@@ -1,7 +1,4 @@
-﻿//using System;
-using System.Text;
-
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace ShooterTutorial.GameObjects
@@ -27,17 +24,10 @@ namespace ShooterTutorial.GameObjects
         public int Lives;
 
         // Get the width of the player ship
-        public int Width
-        {
-            get { return PlayerAnimation.FrameWidth; }
-        }
+        public int Width => PlayerAnimation.FrameWidth;
 
         // Get the height of the player ship
-        public int Height
-        {
-            get { return PlayerAnimation.FrameHeight; }
-
-        }
+        public int Height => PlayerAnimation.FrameHeight;
 
         public void Initialize(Animation animation, Vector2 position)
         {

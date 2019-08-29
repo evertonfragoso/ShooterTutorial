@@ -1,5 +1,4 @@
-﻿//using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace ShooterTutorial.GameObjects
@@ -10,7 +9,7 @@ namespace ShooterTutorial.GameObjects
         public Animation LaserAnimation;
 
         // the speed the laser travels
-        float laserMoveSpeed = 30f;
+        private readonly float laserMoveSpeed = 30f;
 
         // position of the laser
         public Vector2 Position;
@@ -22,19 +21,13 @@ namespace ShooterTutorial.GameObjects
         public bool Active;
 
         // Laser beams range.
-        public int Range;
+        //public int Range;
 
         // the width of the laser image.
-        public int Width
-        {
-            get { return LaserAnimation.FrameWidth; }
-        }
+        public int Width => LaserAnimation.FrameWidth;
 
         // the height of the laser image.
-        public int Height
-        {
-            get { return LaserAnimation.FrameHeight; }
-        }
+        public int Height => LaserAnimation.FrameHeight;
 
         public void Initialize(Animation animation, Vector2 position)
         {

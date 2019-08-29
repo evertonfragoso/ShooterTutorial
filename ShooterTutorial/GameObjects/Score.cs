@@ -1,6 +1,4 @@
-﻿//using System;
-
-namespace ShooterTutorial.GameObjects
+﻿namespace ShooterTutorial.GameObjects
 {
     public class Score
     {

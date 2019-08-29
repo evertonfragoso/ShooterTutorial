@@ -7,13 +7,8 @@
  * credit for it that's cool but not mandatory
 /************************************************************************/
 
-//using System;
 using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-
 using Microsoft.Xna.Framework;
-//using Microsoft.Xna.Framework.Graphics;
 
 namespace ShooterTutorial.GameScreens
 {
@@ -25,7 +20,7 @@ namespace ShooterTutorial.GameScreens
     public static class ScreenManager
     {
         // Private members
-        private static List<BaseScreen> _screens = new List<BaseScreen>();
+        private static readonly List<BaseScreen> _screens = new List<BaseScreen>();
         private static bool _started;
         private static BaseScreen _previous;
 
@@ -39,24 +34,15 @@ namespace ShooterTutorial.GameScreens
         public static void AddScreen(BaseScreen screen)
         {
             for (int i = 0; i < _screens.Count; i++)
-            {
                 if (_screens[i].Name == screen.Name)
-                {
                     return;
-                }
-            }
+
             _screens.Add(screen);
         }
 
-        public static int GetTotalScreens()
-        {
-            return _screens.Count;
-        }
+        public static int GetTotalScreens() => _screens.Count;
 
-        public static BaseScreen GetScreen(int idx)
-        {
-            return _screens[idx];
-        }
+        public static BaseScreen GetScreen(int idx) => _screens[idx];
 
         /// <summary>
         /// Go to screen
@@ -65,15 +51,11 @@ namespace ShooterTutorial.GameScreens
         public static void GotoScreen(BaseScreen destinationScreen)
         {
             foreach (BaseScreen screen in _screens)
-            {
                 if (screen.Name == destinationScreen.Name)
                 {
                     // Shutdown previous screen
                     _previous = ActiveScreen;
-                    if (ActiveScreen != null)
-                    {
-                        ActiveScreen.UnloadContent();
-                    }
+                    if (ActiveScreen != null) ActiveScreen.UnloadContent();
 
                     // Initialize new screen
                     ActiveScreen = screen;
@@ -82,7 +64,6 @@ namespace ShooterTutorial.GameScreens
 
                     return;
                 }
-            }
         }
 
         /// <summary>
@@ -91,10 +72,7 @@ namespace ShooterTutorial.GameScreens
         public static void Initialize()
         {
             _started = true;
-            if (ActiveScreen != null)
-            {
-                ActiveScreen.Initialize();
-            }
+            if (ActiveScreen != null) ActiveScreen.Initialize();
         }
 
         /// <summary>
@@ -115,19 +93,13 @@ namespace ShooterTutorial.GameScreens
         public static void LoadContent()
         {
             if (_started == false) return;
-            if (ActiveScreen != null)
-            {
-                ActiveScreen.LoadContent();
-            }
+            if (ActiveScreen != null) ActiveScreen.LoadContent();
         }
 
         public static void UnloadContent()
         {
             if (_started == false) return;
-            if (ActiveScreen != null)
-            {
-                ActiveScreen.UnloadContent();
-            }
+            if (ActiveScreen != null) ActiveScreen.UnloadContent();
         }
 
         /// <summary>
@@ -137,10 +109,7 @@ namespace ShooterTutorial.GameScreens
         public static void Update(GameTime gameTime)
         {
             if (_started == false) return;
-            if (ActiveScreen != null)
-            {
-                ActiveScreen.Update(gameTime);
-            }
+            if (ActiveScreen != null) ActiveScreen.Update(gameTime);
         }
 
         /// <summary>
@@ -150,10 +119,7 @@ namespace ShooterTutorial.GameScreens
         public static void Draw(GameTime gameTime)
         {
             if (_started == false) return;
-            if (ActiveScreen != null)
-            {
-                ActiveScreen.Draw(gameTime);
-            }
+            if (ActiveScreen != null) ActiveScreen.Draw(gameTime);
         }
     }
 }

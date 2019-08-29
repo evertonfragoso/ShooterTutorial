@@ -14,7 +14,6 @@ namespace C3.XNA
     public static class Primitives2D
     {
 
-
         #region Private Members
 
         private static readonly Dictionary<String, List<Vector2>> circleCache = new Dictionary<string, List<Vector2>>();
@@ -47,9 +46,7 @@ namespace C3.XNA
                 return;
 
             for (int i = 1; i < points.Count; i++)
-            {
                 DrawLine(spriteBatch, points[i - 1] + position, points[i] + position, color, thickness);
-            }
         }
 
 
@@ -64,9 +61,7 @@ namespace C3.XNA
             // Look for a cached version of this circle
             String circleKey = radius + "x" + sides;
             if (circleCache.ContainsKey(circleKey))
-            {
                 return circleCache[circleKey];
-            }
 
             List<Vector2> vectors = new List<Vector2>();
 
@@ -74,9 +69,7 @@ namespace C3.XNA
             double step = max / sides;
 
             for (double theta = 0.0; theta < max; theta += step)
-            {
                 vectors.Add(new Vector2((float)(radius * Math.Cos(theta)), (float)(radius * Math.Sin(theta))));
-            }
 
             // then add the first vector again so it's a complete loop
             vectors.Add(new Vector2((float)(radius * Math.Cos(0)), (float)(radius * Math.Sin(0))));
@@ -139,10 +132,7 @@ namespace C3.XNA
         /// <param name="color">The color to draw the rectangle in</param>
         public static void FillRectangle(this SpriteBatch spriteBatch, Rectangle rect, Color color)
         {
-            if (pixel == null)
-            {
-                CreateThePixel(spriteBatch);
-            }
+            if (pixel == null) CreateThePixel(spriteBatch);
 
             // Simply use the function already there
             spriteBatch.Draw(pixel, rect, color);
@@ -158,10 +148,7 @@ namespace C3.XNA
         /// <param name="angle">The angle in radians to draw the rectangle at</param>
         public static void FillRectangle(this SpriteBatch spriteBatch, Rectangle rect, Color color, float angle)
         {
-            if (pixel == null)
-            {
-                CreateThePixel(spriteBatch);
-            }
+            if (pixel == null) CreateThePixel(spriteBatch);
 
             spriteBatch.Draw(pixel, rect, null, color, angle, Vector2.Zero, SpriteEffects.None, 0);
         }
@@ -190,10 +177,7 @@ namespace C3.XNA
         /// <param name="color">The color to draw the rectangle in</param>
         public static void FillRectangle(this SpriteBatch spriteBatch, Vector2 location, Vector2 size, Color color, float angle)
         {
-            if (pixel == null)
-            {
-                CreateThePixel(spriteBatch);
-            }
+            if (pixel == null) CreateThePixel(spriteBatch);
 
             // stretch the pixel between the two vectors
             spriteBatch.Draw(pixel,
@@ -395,10 +379,7 @@ namespace C3.XNA
         /// <param name="thickness">The thickness of the line</param>
         public static void DrawLine(this SpriteBatch spriteBatch, Vector2 point, float length, float angle, Color color, float thickness)
         {
-            if (pixel == null)
-            {
-                CreateThePixel(spriteBatch);
-            }
+            if (pixel == null) CreateThePixel(spriteBatch);
 
             // stretch the pixel between the two vectors
             spriteBatch.Draw(pixel,
@@ -425,10 +406,7 @@ namespace C3.XNA
 
         public static void PutPixel(this SpriteBatch spriteBatch, Vector2 position, Color color)
         {
-            if (pixel == null)
-            {
-                CreateThePixel(spriteBatch);
-            }
+            if (pixel == null) CreateThePixel(spriteBatch);
 
             spriteBatch.Draw(pixel, position, color);
         }
