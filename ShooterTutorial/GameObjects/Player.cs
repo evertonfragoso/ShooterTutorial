@@ -76,7 +76,7 @@ namespace ShooterTutorial.GameObjects
         {
             Lives--;
 
-            if (Lives <= 0)
+            if (Lives < 0)
             {
                 Active = false;
                 return;
