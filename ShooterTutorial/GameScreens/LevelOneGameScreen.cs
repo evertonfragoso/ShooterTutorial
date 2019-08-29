@@ -1,4 +1,5 @@
-﻿using System;
+﻿#region Usings
+using System;
 using System.Collections.Generic;
 //using System.Linq;
 using System.Text;
@@ -12,6 +13,9 @@ using Microsoft.Xna.Framework.Audio;
 //using Microsoft.Xna.Framework.Media;
 
 using ShooterTutorial.GameObjects;
+using C3.XNA;
+
+#endregion
 
 namespace ShooterTutorial.GameScreens
 {
@@ -37,10 +41,6 @@ namespace ShooterTutorial.GameScreens
         // Keyboard states used to determine key presses
         private static KeyboardState _currentKeyboardState;
         private static KeyboardState _prevKeyboardState;
-
-        // Gamepad states used to determine button presses
-        private static GamePadState _currentGamePadState;
-        private static GamePadState _prevGamePadState;
 
         // Mouse states used to track Mouse button press
         private static MouseState _currentMouseState;
@@ -192,13 +192,11 @@ namespace ShooterTutorial.GameScreens
 
         public override void Update(GameTime gameTime)
         {
-            // Save the previous state of the keyboard and game pad so we can determine single key/button presses
-            _prevGamePadState = _currentGamePadState;
+            // Save the previous state of the keyboard so we can determine single key/button presses
             _prevKeyboardState = _currentKeyboardState;
 
-            // Read the current state of the keyboard and gamepad and store it
+            // Read the current state of the keyboard and store it
             _currentKeyboardState = Keyboard.GetState();
-            _currentGamePadState = GamePad.GetState(PlayerIndex.One);
 
             // Get Mouse states
             _prevMouseState = _currentMouseState;
@@ -245,35 +243,26 @@ namespace ShooterTutorial.GameScreens
             _player.Draw(_spriteBatch);
 
             // Draw the Lasers
-            for (int l = 0; l < laserBeams.Count; l++)
-            {
-                laserBeams[l].Draw(_spriteBatch);
-            }
+            foreach (Laser laser in laserBeams) laser.Draw(_spriteBatch);
 
             // Draw the Enemies
-            for (int i = 0; i < enemies.Count; i++)
-            {
-                enemies[i].Draw(_spriteBatch);
-            }
+            foreach (Enemy enemy in enemies) enemy.Draw(_spriteBatch);
 
             // Draw the explosions
-            for (int e = 0; e < explosions.Count; e++)
-            {
-                explosions[e].Draw(_spriteBatch);
-            }
+            foreach (Explosion explosion in explosions) explosion.Draw(_spriteBatch);
 
+            // Draw Lives score
             StringBuilder showLives = new StringBuilder("Lives " + _player.Lives);
             Vector2 showLivesPosition = new Vector2(10, _device.Viewport.Height - 40);
             _spriteBatch.DrawString(_spriteFont, showLives, showLivesPosition, Color.Red, 0, Vector2.Zero, 0.5f, SpriteEffects.None, 1f);
 
-            Rectangle lifeBar = new Rectangle(10, _device.Viewport.Height - 10, _player.Health * 2, 10);
-            Color[] data = new Color[lifeBar.Width * lifeBar.Height];
-            Texture2D rectTexture = new Texture2D(_device, lifeBar.Width, lifeBar.Height);
-            for (int i = 0; i < data.Length; ++i) data[i] = Color.Red;
-            rectTexture.SetData(data);
-            Vector2 position = new Vector2(lifeBar.Left, lifeBar.Top);
-            _spriteBatch.Draw(rectTexture, position, Color.White);
+            // Draw Lifebar
+            Rectangle lifeBar = new Rectangle(10, _device.Viewport.Height - 15, _player.Health * 2, 10);
+            Rectangle lifeBarContainer = new Rectangle(lifeBar.X - 1, lifeBar.Y - 1, 202, 12);
+            _spriteBatch.DrawRectangle(lifeBarContainer, Color.White, 1);
+            _spriteBatch.FillRectangle(lifeBar, Color.Red);
 
+            // Draw Score
             StringBuilder showScore = new StringBuilder("Score " + _player.Score.LevelOneScore);
             Vector2 showScorePosition = new Vector2(_device.Viewport.Width - _spriteFont.MeasureString(showScore).X, _device.Viewport.Height - 20);
             _spriteBatch.DrawString(_spriteFont, showScore, showScorePosition, Color.Red, 0, Vector2.Zero, 0.5f, SpriteEffects.None, 1f);
@@ -305,10 +294,6 @@ namespace ShooterTutorial.GameScreens
                 _player.Position += posDelta;
             }
 
-            // Get Thumbstick Controls
-            _player.Position.X += _currentGamePadState.ThumbSticks.Left.X * PlayerMoveSpeed;
-            _player.Position.Y -= _currentGamePadState.ThumbSticks.Left.Y * PlayerMoveSpeed;
-
             // Use the Keyboard / Dpad
             if (IsLeftKey()) _player.Position.X -= PlayerMoveSpeed;
             if (IsRightKey()) _player.Position.X += PlayerMoveSpeed;
@@ -325,40 +310,39 @@ namespace ShooterTutorial.GameScreens
                 _device.Viewport.Width - (_player.Width * Scale));
         }
 
+        #region Keys
+
         private bool IsUpKey()
         {
             return _currentKeyboardState.IsKeyDown(Keys.Up) ||
-                    _currentKeyboardState.IsKeyDown(Keys.W) ||
-                    ButtonState.Pressed == _currentGamePadState.DPad.Up;
+                    _currentKeyboardState.IsKeyDown(Keys.W);
         }
 
         private bool IsDownKey()
         {
             return _currentKeyboardState.IsKeyDown(Keys.Down) ||
-                    _currentKeyboardState.IsKeyDown(Keys.S) ||
-                    ButtonState.Pressed == _currentGamePadState.DPad.Down;
+                    _currentKeyboardState.IsKeyDown(Keys.S);
         }
 
         private bool IsLeftKey()
         {
             return _currentKeyboardState.IsKeyDown(Keys.Left) ||
-                    _currentKeyboardState.IsKeyDown(Keys.A) ||
-                    ButtonState.Pressed == _currentGamePadState.DPad.Left;
+                    _currentKeyboardState.IsKeyDown(Keys.A);
         }
 
         private bool IsRightKey()
         {
             return _currentKeyboardState.IsKeyDown(Keys.Right) ||
-                    _currentKeyboardState.IsKeyDown(Keys.D) ||
-                    ButtonState.Pressed == _currentGamePadState.DPad.Right;
+                    _currentKeyboardState.IsKeyDown(Keys.D);
         }
 
         private bool IsFireKey()
         {
             return _currentKeyboardState.IsKeyDown(Keys.Space) ||
-                    (ButtonState.Pressed == _currentMouseState.RightButton) ||
-                    (ButtonState.Pressed == _currentGamePadState.Buttons.X);
+                    (ButtonState.Pressed == _currentMouseState.RightButton);
         }
+
+        #endregion
 
         private void UpdateEnemies(GameTime gameTime)
         {

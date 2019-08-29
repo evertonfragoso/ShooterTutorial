@@ -3,8 +3,8 @@
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-//using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Input.Touch;
+using Microsoft.Xna.Framework.Input;
+//using Microsoft.Xna.Framework.Input.Touch;
 
 using ShooterTutorial.GameScreens;
 
@@ -62,9 +62,6 @@ namespace ShooterTutorial
 
             ScreenManager.Initialize();
 
-            // Enable the FreeDrag gesture
-            TouchPanel.EnabledGestures = GestureType.FreeDrag;
-
             base.Initialize();
         }
 
@@ -85,6 +82,8 @@ namespace ShooterTutorial
         protected override void UnloadContent()
         {
             ScreenManager.UnloadContent();
+            graphics.Dispose();
+            spriteBatch.Dispose();
         }
 
         /// <summary>
